@@ -5,21 +5,26 @@
 **Programa:** Ingeniería en Tecnologías de la Información e Innovación Digital  
 **Asignatura:** Bases de Datos en la Nube · **Docente:** M.T.I. Marco Antonio Ramírez Hernández
 
-Guía práctica de instalación, configuración y verificación de PostgreSQL en Docker Compose: entorno local compartido y VPS individual. Incluye acceso con pgAdmin, configuración de red, roles, vistas, respaldo, pruebas y evidencias. También documenta MySQL en el VPS.
+Guía de instalación, configuración y verificación de PostgreSQL con Docker Compose en el equipo local compartido y en el VPS individual. Incluye pgAdmin, MySQL y phpMyAdmin en el VPS, roles, vistas, respaldos y pruebas reversibles.
 
-## Descargar el manual
+## Manual completo
 
-[**Abrir o descargar el PDF completo**](Manual_PostgreSQL_Local_y_VPS_240784.pdf)
+[**Abrir o descargar el PDF**](Manual_PostgreSQL_Local_y_VPS_240784.pdf)
 
-## Entornos documentados
+## Acceso actual
 
-| Entorno | Servicios | Acceso principal |
+| Servicio | Acceso | Red/puerto del contenedor |
 |---|---|---|
-| Local compartido | PostgreSQL 17 · pgAdmin | PostgreSQL `127.0.0.1:5432` · pgAdmin local |
-| VPS individual | PostgreSQL 18.6 · pgAdmin | `cityreport.com.mx:40784` · pgAdmin `:40787` |
-| VPS individual | MySQL 8.4 · phpMyAdmin | `cityreport.com.mx:40785` · phpMyAdmin `:40786` |
+| PostgreSQL VPS | Solo desde la red Docker; pgAdmin usa `postgres` | `postgres:5432` |
+| MySQL VPS | Solo desde la red Docker; phpMyAdmin usa `mysql` | `mysql:3306` |
+| phpMyAdmin | http://cityreport.com.mx:40784 | `80/tcp` |
+| pgAdmin | http://cityreport.com.mx:40785 | `80/tcp` |
+| PostgreSQL local | `127.0.0.1:5432` | `5432/tcp` |
+| pgAdmin local | `http://localhost:8080` | `80/tcp` |
 
-> Las credenciales y secretos se omiten de este repositorio. Consulta el PDF para los pasos completos y la evidencia correspondiente.
+Los puertos públicos `40784` y `40785` corresponden a los paneles web. Los motores de base de datos no publican puertos SQL al host. El VPS permite actualmente el acceso web desde cualquier IP; limita el origen de esas reglas a IP confiables para uso continuo.
+
+> Las credenciales y secretos se omiten del repositorio. Las capturas de pruebas SQL del VPS identifican la configuración anterior al cambio de puertos; el panel y el despliegue descritos reflejan la configuración actual.
 
 ---
 
