@@ -1,82 +1,86 @@
-# Práctica individual · Base de Datos en la Nube
+# Práctica individual · Bases de datos en la nube
 
 **Estudiante:** Jael Adrián González Cruz · **Matrícula:** 240784 · **Grupo:** 7A
 **Programa:** Ingeniería en Tecnologías de la Información e Innovación Digital
 **Docente:** M.T.I. Marco Antonio Ramírez Hernández
 
-Esta entrega reúne el reporte técnico, la configuración Docker Compose del VPS, plantillas SQL sin contraseñas reales y evidencia de pruebas para PostgreSQL y MySQL.
+Este proyecto reúne el manual de PostgreSQL local y el despliegue individual del VPS. Para cubrir el instrumento de Unidad 1, el proyecto Docker Compose del VPS incluye PostgreSQL, MySQL, pgAdmin y phpMyAdmin. PostgreSQL local se documenta como instalación nativa de Windows; no se afirma que Docker local haya sido ejecutado.
 
 ## Entregables
 
-- [Reporte de la Unidad 1](Reporte_Unidad1_240784.pdf)
+- [Reporte técnico](Reporte_Unidad1_240784.pdf)
 - [`docker-compose.yml`](docker-compose.yml) y [`.env.example`](.env.example)
-- [Plantilla PostgreSQL](sql/postgresql.sql) y [plantilla MySQL](sql/mysql.sql)
-- [Pruebas PostgreSQL](sql/pruebas_postgresql.sql) y [pruebas MySQL](sql/pruebas_mysql.sql)
-- [Capturas y transcripciones](evidencias/)
+- [Esquemas y roles PostgreSQL](sql/postgresql.sql) y [MySQL](sql/mysql.sql)
+- [Pruebas SQL de demostración PostgreSQL](sql/pruebas_postgresql.sql) y [MySQL](sql/pruebas_mysql.sql)
+- [Capturas de paneles y registro de evidencias](evidencias/)
 
-## Servicios documentados en el VPS
+## Puertos y enlaces
 
-| Servicio | Dirección | Puerto del contenedor |
-|---|---|---:|
-| PostgreSQL 18.6 | `cityreport.com.mx:40784` | 5432 |
-| MySQL 8.4 | `cityreport.com.mx:40785` | 3306 |
-| phpMyAdmin | `http://cityreport.com.mx:40786` | 80 |
-| pgAdmin | `http://cityreport.com.mx:40787` | 80 |
+| Servicio | Acceso | Puerto interno | Protocolo |
+|---|---|---:|---|
+| PostgreSQL | `cityreport.com.mx:40784` | 5432 | TCP/SQL |
+| MySQL | `cityreport.com.mx:40785` | 3306 | TCP/SQL |
+| phpMyAdmin | `http://cityreport.com.mx:40786` | 80 | HTTP/web |
+| pgAdmin | `http://cityreport.com.mx:40787` | 80 | HTTP/web |
 
-DNS apunta `cityreport.com.mx` a `177.7.61.91`; el puerto se añade en la URL o cliente y no forma parte del registro DNS. Configura el firewall para permitir solo las fuentes autorizadas cuando sea posible.
+El registro DNS A de `cityreport.com.mx` apunta a `177.7.61.91`; los puertos se indican en los clientes o URLs y no forman parte del registro DNS.
 
-## Despliegue
+## Preparar y desplegar en el VPS
 
-En una copia de este proyecto dentro del VPS, crea un archivo privado `.env` a partir de la plantilla, reemplaza todos los marcadores por claves únicas y robustas, y luego valida y arranca:
+Usa `/home/Gonzalez` como raíz del proyecto. Crea `.env` desde la plantilla, sustituye todos los marcadores por secretos únicos y conserva el archivo privado:
 
 ```bash
+cd /home/Gonzalez
 cp .env.example .env
 chmod 600 .env
-${EDITOR:-nano} .env
+nano .env
 docker compose config --quiet
 docker compose up -d
 docker compose ps
 docker compose logs --tail=100 postgres mysql pgadmin phpmyadmin
 ```
 
-Carga cada plantilla solo en una base vacía y usando una cuenta administradora. Primero copia el SQL a un directorio privado e introduce allí las contraseñas reales en los marcadores `CAMBIAR_PASSWORD_*`; no guardes esos cambios en Git.
+El proyecto usa volúmenes nombrados. `docker compose down` conserva esos datos; `docker compose down -v` los elimina. No ejecutes el último comando para resolver problemas de contraseñas.
+
+## Aplicar los esquemas
+
+Los archivos SQL son plantillas para una base `db_test` nueva. Antes de usarlos sobre una base con datos, genera un respaldo y compara las columnas existentes. Los marcadores `CAMBIAR_PASSWORD_*` deben reemplazarse localmente; no publiques esas sustituciones.
+
+PostgreSQL: el usuario administrador inicial de Compose puede ejecutar el script:
 
 ```bash
-install -d -m 700 privado
-cp sql/postgresql.sql privado/postgresql.sql
-cp sql/mysql.sql privado/mysql.sql
-chmod 600 privado/*.sql
+docker compose cp sql/postgresql.sql postgres:/tmp/postgresql.sql
+docker compose exec postgres sh -lc 'psql -U "$POSTGRES_USER" -d db_test -v ON_ERROR_STOP=1 -f /tmp/postgresql.sql'
 ```
 
-Ejecuta los archivos privados con el cliente de cada motor desde el VPS o desde un cliente autorizado. `postgresql.sql` y `mysql.sql` crean tablas de demostración, roles, cuentas, triggers y vistas; revisa primero las sentencias `CREATE USER` y los permisos. Las contraseñas que sigan como marcadores no son credenciales válidas.
-
-Los archivos `sql/pruebas_postgresql.sql` y `sql/pruebas_mysql.sql` contienen diez operaciones ilustrativas con transacción y `ROLLBACK`. Ejecuta PostgreSQL desde el cliente externo con:
+MySQL: usa root dentro del contenedor para crear roles y cuentas. `MYSQL_ADMIN_USER` solo recibe permisos sobre la base y no puede administrar cuentas globales:
 
 ```bash
-psql "host=cityreport.com.mx port=40784 dbname=db_test user=adrian.gonzalez" -W -v ON_ERROR_STOP=1 -f sql/pruebas_postgresql.sql
+docker compose cp sql/mysql.sql mysql:/tmp/mysql.sql
+docker compose exec mysql mysql -uroot -p db_test
 ```
 
-Para MySQL, entra con una cuenta autorizada para las operaciones y ejecuta el archivo desde el cliente:
+En el prompt de MySQL escribe la contraseña root de `.env` cuando la solicite y ejecuta:
 
-```bash
-mysql -h cityreport.com.mx -P 40785 -u adrian.gonzalez -p db_test
-SOURCE sql/pruebas_mysql.sql;
+```sql
+SOURCE /tmp/mysql.sql;
 ```
 
-Escribe la contraseña cuando el cliente la solicite. No la agregues a la línea de comandos ni a capturas. Las operaciones se revierten al final; conserva las transcripciones de tu propia ejecución.
+Las pruebas `sql/pruebas_*.sql` son demostraciones reversibles y terminan con `ROLLBACK`. No sustituyen los diez casos específicos que proporcione el docente; reemplázalas o complétalas con esos enunciados y guarda una captura real por prueba.
 
-## Conexión y persistencia
+## Revisión de este manual · 24 de octubre de 2026
 
-PostgreSQL y MySQL aceptan conexiones remotas por los puertos TCP 40784 y 40785. Usa el host `cityreport.com.mx`, la base `db_test` y la cuenta correspondiente. En los paneles web, pgAdmin administra PostgreSQL y phpMyAdmin administra MySQL; sus URL usan 40787 y 40786 respectivamente.
+- Hostinger informa que el VPS `177.7.61.91` está encendido con Debian 13, plan KVM 2, 2 vCPU, 8 GB de RAM y disco de 100 GB.
+- Desde esta PC se resolvió `cityreport.com.mx` a `177.7.61.91` y se comprobó respuesta TCP en `40784`, `40785`, `40786` y `40787`. Esto confirma alcance de puertos, no autenticación de base ni estado `healthy` de contenedores.
+- El administrador de Docker de Hostinger no entrega el listado de proyectos para este sistema operativo; la conexión SSH por llave configurada fue rechazada. Por ello, el `docker compose ps`, los logs y una conexión SQL autenticada del VPS deben recapturarse desde una sesión autorizada.
+- En esta PC no está instalado Docker CLI ni se detectó un servicio PostgreSQL. La guía incluye los pasos locales, pero la ejecución local se debe demostrar en el equipo que se utilizará para la entrega.
+- Las capturas de pgAdmin y phpMyAdmin incluidas en el reporte son las imágenes aportadas en la versión anterior del documento. Las transcripciones de `evidencias/06_pruebas_*.txt` no son salidas crudas de los clientes SQL ni reemplazan capturas de consultas reproducibles.
+- Las imágenes `evidencias/07_postgresql_local_terminal.png`, `08_postgresql_vps_terminal.png` y `09_mysql_vps_terminal.png` son resúmenes visuales, no capturas de sesiones crudas verificadas. No deben presentarse como evidencia de ejecución.
 
-Los volúmenes Compose conservan los datos al recrear contenedores. `docker compose down` conserva los volúmenes; `docker compose down -v` los elimina permanentemente.
+## Estado de Git y entrega
 
-## Evidencia y alcance del cotejo
+`main` contiene el merge histórico de Práctica 02. `Practica03` parte de `main` y sigue sin fusionarse. En GitHub existe una sola rama Manual, que se desprende del commit de documentación común anterior al merge de P02; por eso aparece como línea independiente y no incluye todavía esa integración. Esta revisión quedó comprometida localmente, pero no se pudo publicar en GitHub: las credenciales conectadas no tienen permiso de escritura para el repositorio. No se fusionó ni reescribió ninguna rama en esta revisión. El bundle `.git/manual-local-70aa754-backup.bundle` conserva una copia del historial previo de Manual. La lista de verificación pide fusionar el manual a `main` y un repositorio privado; ambos puntos siguen pendientes.
 
-Las capturas terminales y los archivos `.txt` registran diez operaciones demostrativas en PostgreSQL local, PostgreSQL VPS y MySQL VPS. Las operaciones de prueba terminaron con `ROLLBACK`. El cotejo oficial enumera diez casos de clase, pero no proporciona sus enunciados en la lista recibida; compara las demostraciones con las instrucciones que haya dado el docente antes de afirmar que esos casos están aprobados. El alumno debe añadir su conclusión personal y recopilar cualquier evidencia faltante de cuentas del sistema operativo, privilegios y firewall.
+## Seguridad
 
-La rama `Manual_VPS_BDs_Relacionales` parte de `main`, de modo que se visualiza separada de `Practica03`. El historial registra el commit de entrega y su fusión no fast-forward a `main`.
-
-## Seguridad de Git
-
-El repositorio es público. `.env`, `privado/`, llaves privadas y scripts de inicialización con credenciales reales se excluyen mediante `.gitignore`. No subas contraseñas de GitHub, SSH ni bases de datos. La contraseña de GitHub debe administrarse con Git Credential Manager y cambiarse si se compartió en una conversación.
+No subas `.env`, respaldos con datos, llaves privadas ni contraseñas reales. El repositorio remoto es público; las credenciales deben entregarse solo mediante un canal autorizado y separado del repositorio.
