@@ -8,7 +8,8 @@ Este proyecto reúne el manual de instalación y verificación de PostgreSQL en 
 
 ## Entregables
 
-- [Manual PostgreSQL local y VPS](Reporte_Unidad1_240784.pdf)
+- [Manual PostgreSQL local y VPS · edición rediseñada](Reporte_Unidad1_240784_redisenado.pdf)
+- [Versión anterior preservada](Reporte_Unidad1_240784.pdf)
 - [Evidencias locales compartidas](evidencias/local_compartido/)
 - [Evidencias de VPS y transcripciones](evidencias/)
 - [`docker-compose.yml`](docker-compose.yml) y [`.env.example`](.env.example)
