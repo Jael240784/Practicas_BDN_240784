@@ -83,8 +83,8 @@ Las pruebas SQL son demostraciones reproducibles. El manual incluye evidencia de
 
 ## Estado de Git y entrega
 
-La rama `Manual_VPS_BDs_Relacionales` se conserva separada de `main` y `Practica03`; esta guía no hace una fusión. Las modificaciones del manual y sus evidencias se registran en esta rama. El repositorio es público, por lo que `.env`, `privado/`, volcados y contraseñas deben permanecer fuera de Git.
+La rama `Manual_VPS_BDs_Relacionales` se conserva separada de `main` y `Practica03`; esta guía no hace una fusión. Las modificaciones del manual y sus evidencias se registran en esta rama. El repositorio está configurado como privado. Aun así, `.env`, `privado/`, volcados y contraseñas reales deben permanecer fuera de Git.
 
 ## Seguridad
 
-No subas `.env`, respaldos con datos, llaves privadas ni contraseñas reales. El repositorio remoto es público; las credenciales deben entregarse solo mediante un canal autorizado y separado del repositorio.
+No subas `.env`, respaldos con datos, llaves privadas ni contraseñas reales. Las credenciales deben entregarse solo mediante un canal autorizado y separado del repositorio, aunque el repositorio sea privado.
