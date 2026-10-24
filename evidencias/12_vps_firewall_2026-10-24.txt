@@ -1,6 +1,0 @@
-FIREWALL VPS | 2026-10-24
-Fuente: salida real de sudo ufw status numbered
-Estado UFW: active
-IPv4: 40784/tcp ALLOW IN Anywhere; 40785/tcp ALLOW IN Anywhere; 40786/tcp ALLOW IN Anywhere; 40787/tcp ALLOW IN Anywhere
-IPv6: 40784/tcp ALLOW IN Anywhere (v6); 40785/tcp ALLOW IN Anywhere (v6); 40786/tcp ALLOW IN Anywhere (v6); 40787/tcp ALLOW IN Anywhere (v6)
-Nota: PostgreSQL queda accesible desde cualquier origen según las reglas actuales. Se recomienda restringir 40784/tcp a las IP necesarias o usar VPN/túnel SSH. Este registro es descriptivo y no aplicó cambios al firewall.
