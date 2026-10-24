@@ -1,5 +1,0 @@
-PostgreSQL VPS | cityreport.com.mx:40784 | db_test
-ROLES: admin (LOGIN=False), buyer (LOGIN=False), common (LOGIN=False), not_registered (LOGIN=False), seller (LOGIN=False), superadmin (LOGIN=False), support (LOGIN=False)
-MEMBERSHIPS: "adrian.gonzalez" -> superadmin; "bryan.javier" -> seller; "ivan.macin" -> not_registered; "ivan.ojeda" -> seller; "luis.david" -> support; "marco.ramirez" -> admin
-APP USERS: adrian.gonzalez -> super_admin; bryan.javier -> saler; ivan.macin -> unregistered; ivan.ojeda -> saler; luis.david -> support; marco.ramirez -> admin
-TRACE VIEWS: vw_trazabilidad_productos, vw_trazabilidad_usuarios
