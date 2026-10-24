@@ -1,0 +1,13 @@
+VPS | PostgreSQL cityreport.com.mx:40784
+CONEXION OK | base=db_test | usuario=jael_admin
+01 SELECT usuarios | filas=6 | OK
+02 INSERT usuario temporal | OK
+03 UPDATE rol temporal | filas=1 | OK
+04 SELECT vista usuarios | eventos=Create,Update | OK
+05 DELETE usuario temporal | filas=1 | OK
+06 SELECT productos | filas=2 | OK
+07 INSERT producto temporal | OK
+08 UPDATE precio temporal | filas=1 | OK
+09 SELECT vista productos | eventos=Create,Update | OK
+10 DELETE producto temporal | filas=1 | OK
+ROLLBACK | filas de prueba descartadas; datos permanentes sin cambios

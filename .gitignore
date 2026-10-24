@@ -1,0 +1,10 @@
+# Local credentials and deployment data
+.env
+*.env.local
+privado/
+mysql/init/
+postgres/init/
+*.log
+__pycache__/
+*.py[cod]
+
