@@ -70,16 +70,16 @@ Las pruebas `sql/pruebas_*.sql` son demostraciones reversibles y terminan con `R
 
 ## Revisión de este manual · 24 de octubre de 2026
 
-- Hostinger informa que el VPS `177.7.61.91` está encendido con Debian 13, plan KVM 2, 2 vCPU, 8 GB de RAM y disco de 100 GB.
-- Desde esta PC se resolvió `cityreport.com.mx` a `177.7.61.91` y se comprobó respuesta TCP en `40784`, `40785`, `40786` y `40787`. Esto confirma alcance de puertos, no autenticación de base ni estado `healthy` de contenedores.
-- El administrador de Docker de Hostinger no entrega el listado de proyectos para este sistema operativo; la conexión SSH por llave configurada fue rechazada. Por ello, el `docker compose ps`, los logs y una conexión SQL autenticada del VPS deben recapturarse desde una sesión autorizada.
-- En esta PC no está instalado Docker CLI ni se detectó un servicio PostgreSQL. La guía incluye los pasos locales, pero la ejecución local se debe demostrar en el equipo que se utilizará para la entrega.
-- Las capturas de pgAdmin y phpMyAdmin incluidas en el reporte son las imágenes aportadas en la versión anterior del documento. Las transcripciones de `evidencias/06_pruebas_*.txt` no son salidas crudas de los clientes SQL ni reemplazan capturas de consultas reproducibles.
-- Las imágenes `evidencias/07_postgresql_local_terminal.png`, `08_postgresql_vps_terminal.png` y `09_mysql_vps_terminal.png` son resúmenes visuales, no capturas de sesiones crudas verificadas. No deben presentarse como evidencia de ejecución.
+- El VPS `177.7.61.91` responde con Debian 13. El proyecto de Jael está en `/home/Gonzalez`, sin carpeta `Gonzalez` anidada.
+- `sudo docker compose config --quiet` terminó correctamente. Los cuatro contenedores PostgreSQL, MySQL, pgAdmin y phpMyAdmin están activos; PostgreSQL y MySQL reportan `healthy`. El contenedor PostgreSQL publica `40784:5432`.
+- Desde esta PC se autenticó una conexión a PostgreSQL en `cityreport.com.mx:40784`, base `db_test`. Se consultaron roles, membresías, usuarios de aplicación y vistas de trazabilidad. También se ejecutaron diez operaciones demostrativas y se revirtieron con `ROLLBACK`.
+- PostgreSQL 18.6 está instalado nativamente en este equipo y responde en `127.0.0.1:40784`. Docker Compose local no está instalado ni se reporta como ejecutado; el manual de instalación se limita a PostgreSQL local y PostgreSQL en el VPS.
+- Las capturas en `evidencias/` muestran sesiones y paneles reales. Las transcripciones `06_pruebas_local_pg.txt` y `06_pruebas_vps_pg.txt` registran las operaciones. Los archivos `10_vps_compose_2026-10-24.txt`, `11_postgres_roles_vps_2026-10-24.txt` y `12_vps_firewall_2026-10-24.txt` conservan las comprobaciones del servidor.
+- Los logs de PostgreSQL de las últimas 24 horas no mostraron errores críticos con el filtro usado. UFW está activo; sus reglas actuales permiten `40784` a cualquier IPv4/IPv6. La guía señala cómo restringirlo a una IP autorizada; esta revisión no modificó el firewall.
 
 ## Estado de Git y entrega
 
-`main` contiene el merge histórico de Práctica 02. `Practica03` parte de `main` y sigue sin fusionarse. En GitHub existe una sola rama Manual, que se desprende del commit de documentación común anterior al merge de P02; por eso aparece como línea independiente y no incluye todavía esa integración. Esta revisión quedó comprometida localmente, pero no se pudo publicar en GitHub: las credenciales conectadas no tienen permiso de escritura para el repositorio. No se fusionó ni reescribió ninguna rama en esta revisión. El bundle `.git/manual-local-70aa754-backup.bundle` conserva una copia del historial previo de Manual. La lista de verificación pide fusionar el manual a `main` y un repositorio privado; ambos puntos siguen pendientes.
+La rama `Manual_VPS_BDs_Relacionales` se conserva separada de `main` y `Practica03`; esta guía no hace una fusión. Las modificaciones del manual y sus evidencias se registran en esta rama. El repositorio es público, por lo que `.env`, `privado/`, volcados y contraseñas deben permanecer fuera de Git.
 
 ## Seguridad
 
