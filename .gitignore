@@ -1,0 +1,9 @@
+YªçŠx±¼±×œ•ªÞw­…Ê'²Û¬zW­~Šëy«,Š	ÚnW¯j¸šnW¬YªçŠx}¼±×œ•ªÞw­…Ê'²Û¬zW­~Šëy«,Š	ÚnW¯j¸šnW¬.env
+.env.*
+!.env.example
+privado/
+*.log
+*.dump
+*.sql.gz
+mysql/data/
+postgres/data/
