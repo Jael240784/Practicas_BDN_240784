@@ -1,4 +1,4 @@
-YªçŠx±¼±×œ•ªÞw­…Ê'²Û¬zW­~Šëy«,Š	ÚnW¯j¸šnW¬YªçŠx}¼±×œ•ªÞw­…Ê'²Û¬zW­~Šëy«,Š	ÚnW¯j¸šnW¬-- Plantilla pÃºblica. Sustituye los marcadores antes de ejecutar. No contiene contraseÃ±as reales.
+-- Script de prÃ¡ctica de Jael 240784. Incluye las credenciales solicitadas; mantener privado.
 USE `db_test`;
 CREATE TABLE IF NOT EXISTS `tb_users` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -83,37 +83,52 @@ CREATE OR REPLACE VIEW `vw_trazabilidad_usuarios` AS
   SELECT id, table_name, operation, db_user, description, operation_date, operation_status FROM tb_logs WHERE table_name='tb_users';
 CREATE OR REPLACE VIEW `vw_trazabilidad_productos` AS
   SELECT id, table_name, operation, db_user, description, operation_date, operation_status FROM tb_logs WHERE table_name='tb_products';
+CREATE OR REPLACE VIEW `vw_total_products_by_category` AS
+  SELECT c.id AS category_id, c.name AS category_name, COUNT(pc.product_id) AS product_count
+  FROM tbc_categories AS c LEFT JOIN tbd_products_categories AS pc ON pc.category_id=c.id
+  GROUP BY c.id, c.name;
 
-CREATE ROLE IF NOT EXISTS 'superadmin','admin','seller','buyer','support','common','not_registered';
-GRANT ALL PRIVILEGES ON `db_test`.* TO 'superadmin';
-GRANT ALL PRIVILEGES ON `db_test`.* TO 'admin';
-GRANT SELECT, INSERT, UPDATE ON `db_test`.`tb_users` TO 'support';
-GRANT SELECT, UPDATE ON `db_test`.`tb_products` TO 'support';
-GRANT SELECT ON `db_test`.`tbc_categories` TO 'support','seller','buyer','common';
-GRANT SELECT, INSERT, UPDATE ON `db_test`.`tb_products` TO 'seller';
-GRANT SELECT ON `db_test`.`tb_products` TO 'buyer','common';
-GRANT SELECT ON `db_test`.`vw_trazabilidad_usuarios` TO 'support';
-GRANT SELECT ON `db_test`.`vw_trazabilidad_productos` TO 'support';
-CREATE USER IF NOT EXISTS 'adrian.gonzalez'@'%' IDENTIFIED BY 'CAMBIAR_PASSWORD_ADRIAN_GONZALEZ';
-GRANT 'superadmin' TO 'adrian.gonzalez'@'%';
-SET DEFAULT ROLE 'superadmin' TO 'adrian.gonzalez'@'%';
-CREATE USER IF NOT EXISTS 'marco.ramirez'@'%' IDENTIFIED BY 'CAMBIAR_PASSWORD_MARCO_RAMIREZ';
+CREATE ROLE IF NOT EXISTS 'super_admin','admin','support','saler','unregistered',
+  'superadmin','seller','buyer','common','not_registered';
+GRANT ALL PRIVILEGES ON *.* TO 'super_admin';
+GRANT ALL PRIVILEGES ON *.* TO 'superadmin';
+GRANT ALL PRIVILEGES ON db_test.* TO 'admin';
+GRANT SELECT, INSERT, UPDATE ON db_test.tb_users TO 'support';
+GRANT SELECT, UPDATE ON db_test.tb_products TO 'support';
+GRANT SELECT ON db_test.tbc_categories TO 'support';
+GRANT SELECT ON db_test.vw_trazabilidad_usuarios TO 'support';
+GRANT SELECT ON db_test.vw_trazabilidad_productos TO 'support';
+GRANT SELECT, INSERT, UPDATE ON db_test.tb_products TO 'saler','seller';
+GRANT SELECT ON db_test.tbc_categories TO 'saler','seller';
+GRANT SELECT ON db_test.tb_products TO 'buyer','common';
+GRANT SELECT ON db_test.tbc_categories TO 'buyer','common';
+GRANT SELECT ON db_test.vw_total_products_by_category TO 'buyer','common','seller';
+
+CREATE USER IF NOT EXISTS 'adrian.gonzalez'@'%' IDENTIFIED BY '240784';
+ALTER USER 'adrian.gonzalez'@'%' IDENTIFIED BY '240784';
+GRANT 'super_admin','superadmin' TO 'adrian.gonzalez'@'%';
+SET DEFAULT ROLE 'super_admin','superadmin' TO 'adrian.gonzalez'@'%';
+CREATE USER IF NOT EXISTS 'marco.ramirez'@'%' IDENTIFIED BY 'qwerty123';
+ALTER USER 'marco.ramirez'@'%' IDENTIFIED BY 'qwerty123';
 GRANT 'admin' TO 'marco.ramirez'@'%';
 SET DEFAULT ROLE 'admin' TO 'marco.ramirez'@'%';
-CREATE USER IF NOT EXISTS 'luis.david'@'%' IDENTIFIED BY 'CAMBIAR_PASSWORD_LUIS_DAVID';
+CREATE USER IF NOT EXISTS 'luis.david'@'%' IDENTIFIED BY '240666';
+ALTER USER 'luis.david'@'%' IDENTIFIED BY '240666';
 GRANT 'support' TO 'luis.david'@'%';
 SET DEFAULT ROLE 'support' TO 'luis.david'@'%';
-CREATE USER IF NOT EXISTS 'bryan.javier'@'%' IDENTIFIED BY 'CAMBIAR_PASSWORD_BRYAN_JAVIER';
-GRANT 'seller' TO 'bryan.javier'@'%';
-SET DEFAULT ROLE 'seller' TO 'bryan.javier'@'%';
-CREATE USER IF NOT EXISTS 'ivan.ojeda'@'%' IDENTIFIED BY 'CAMBIAR_PASSWORD_IVAN_OJEDA';
-GRANT 'seller' TO 'ivan.ojeda'@'%';
-SET DEFAULT ROLE 'seller' TO 'ivan.ojeda'@'%';
-CREATE USER IF NOT EXISTS 'ivan.macin'@'%' IDENTIFIED BY 'CAMBIAR_PASSWORD_IVAN_MACIN';
-GRANT 'not_registered' TO 'ivan.macin'@'%';
-SET DEFAULT ROLE 'not_registered' TO 'ivan.macin'@'%';
+CREATE USER IF NOT EXISTS 'bryan.javier'@'%' IDENTIFIED BY '240000';
+ALTER USER 'bryan.javier'@'%' IDENTIFIED BY '240000';
+GRANT 'saler','seller' TO 'bryan.javier'@'%';
+SET DEFAULT ROLE 'saler','seller' TO 'bryan.javier'@'%';
+CREATE USER IF NOT EXISTS 'ivan.ojeda'@'%' IDENTIFIED BY '240136';
+ALTER USER 'ivan.ojeda'@'%' IDENTIFIED BY '240136';
+GRANT 'saler','seller' TO 'ivan.ojeda'@'%';
+SET DEFAULT ROLE 'saler','seller' TO 'ivan.ojeda'@'%';
+CREATE USER IF NOT EXISTS 'ivan.macin'@'%' IDENTIFIED BY '240793';
+ALTER USER 'ivan.macin'@'%' IDENTIFIED BY '240793';
+GRANT 'unregistered','not_registered' TO 'ivan.macin'@'%';
+SET DEFAULT ROLE 'unregistered','not_registered' TO 'ivan.macin'@'%';
 
 FLUSH PRIVILEGES;
--- ValidaciÃ³n: SELECT usuario, rol FROM usuarios ORDER BY usuario;
--- ValidaciÃ³n: SELECT * FROM vw_trazabilidad_productos ORDER BY operation_date DESC LIMIT 10;
-
+-- Validacion: SELECT usuario, rol FROM usuarios ORDER BY usuario;
+-- Validacion: SELECT * FROM vw_trazabilidad_productos ORDER BY operation_date DESC LIMIT 10;

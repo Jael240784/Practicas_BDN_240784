@@ -1,4 +1,4 @@
-YªçŠx±¼±×œ•ªÞw­…Ê'²Û¬zW­~Šëy«,Š	ÚnW¯j¸šnW¬YªçŠx}¼±×œ•ªÞw­…Ê'²Û¬zW­~Šëy«,Š	ÚnW¯j¸šnW¬-- Plantilla pÃºblica. Sustituye los marcadores antes de ejecutar. No contiene contraseÃ±as reales.
+-- ConfiguraciÃ³n de prÃ¡ctica para Jael 240784. Conserva las claves indicadas por el estudiante.
 \connect db_test
 CREATE TABLE IF NOT EXISTS public.tb_users (
   id BIGSERIAL PRIMARY KEY, email VARCHAR(160) NOT NULL UNIQUE, nickname VARCHAR(100) NOT NULL UNIQUE,
@@ -62,42 +62,48 @@ CREATE OR REPLACE VIEW public.vw_trazabilidad_usuarios AS
   SELECT id,table_name,operation,db_user,description,operation_date,operation_status FROM public.tb_logs WHERE table_name='tb_users';
 CREATE OR REPLACE VIEW public.vw_trazabilidad_productos AS
   SELECT id,table_name,operation,db_user,description,operation_date,operation_status FROM public.tb_logs WHERE table_name='tb_products';
-DO $$ BEGIN
-  IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='superadmin') THEN CREATE ROLE superadmin NOLOGIN; END IF;
-  IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='admin') THEN CREATE ROLE admin NOLOGIN; END IF;
-  IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='seller') THEN CREATE ROLE seller NOLOGIN; END IF;
-  IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='buyer') THEN CREATE ROLE buyer NOLOGIN; END IF;
-  IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='support') THEN CREATE ROLE support NOLOGIN; END IF;
-  IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='common') THEN CREATE ROLE common NOLOGIN; END IF;
-  IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='not_registered') THEN CREATE ROLE not_registered NOLOGIN; END IF;
+CREATE OR REPLACE VIEW public.vw_total_products_by_category AS
+  SELECT c.id AS category_id,c.name AS category_name,COUNT(pc.product_id)::bigint AS product_count
+  FROM public.tbc_categories AS c LEFT JOIN public.tbd_products_categories AS pc ON pc.category_id=c.id
+  GROUP BY c.id,c.name;
+DO $$ DECLARE r text; BEGIN
+  FOREACH r IN ARRAY ARRAY['super_admin','admin','support','saler','unregistered','superadmin','seller','buyer','common','not_registered'] LOOP
+    IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname=r) THEN EXECUTE format('CREATE ROLE %I NOLOGIN',r); END IF;
+  END LOOP;
 END $$;
 
-GRANT CONNECT ON DATABASE db_test TO superadmin,admin,seller,buyer,support,common,not_registered;
-GRANT USAGE ON SCHEMA public TO superadmin,admin,seller,buyer,support,common,not_registered;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO superadmin,admin;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO superadmin,admin;
+GRANT CONNECT ON DATABASE db_test TO super_admin,admin,support,saler,unregistered,superadmin,seller,buyer,common,not_registered;
+GRANT USAGE ON SCHEMA public TO super_admin,admin,support,saler,unregistered,superadmin,seller,buyer,common,not_registered;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO super_admin,superadmin,admin;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO super_admin,superadmin,admin;
+GRANT USAGE,SELECT ON ALL SEQUENCES IN SCHEMA public TO support,saler,seller;
 GRANT SELECT,INSERT,UPDATE ON public.tb_users TO support;
 GRANT SELECT,UPDATE ON public.tb_products TO support;
 GRANT SELECT ON public.tbc_categories,public.vw_trazabilidad_usuarios,public.vw_trazabilidad_productos TO support;
-GRANT SELECT,INSERT,UPDATE ON public.tb_products TO seller;
-GRANT SELECT ON public.tbc_categories,public.tb_products TO buyer,common;
-DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='adrian.gonzalez') THEN CREATE ROLE "adrian.gonzalez" LOGIN PASSWORD 'CAMBIAR_PASSWORD_ADRIAN_GONZALEZ' ; ELSE ALTER ROLE "adrian.gonzalez" WITH LOGIN PASSWORD 'CAMBIAR_PASSWORD_ADRIAN_GONZALEZ'; END IF; END $$;
-GRANT superadmin TO "adrian.gonzalez";
-ALTER ROLE "adrian.gonzalez" SET role TO 'superadmin';
-DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='marco.ramirez') THEN CREATE ROLE "marco.ramirez" LOGIN PASSWORD 'CAMBIAR_PASSWORD_MARCO_RAMIREZ' ; ELSE ALTER ROLE "marco.ramirez" WITH LOGIN PASSWORD 'CAMBIAR_PASSWORD_MARCO_RAMIREZ'; END IF; END $$;
+GRANT SELECT,INSERT,UPDATE ON public.tb_products TO saler,seller;
+GRANT SELECT ON public.tbc_categories TO saler,seller;
+GRANT SELECT ON public.tb_products,public.tbc_categories,public.vw_total_products_by_category TO buyer,common;
+GRANT SELECT ON public.vw_total_products_by_category TO seller;
+GRANT SELECT ON public.usuarios TO super_admin,superadmin,admin,support,saler,seller,buyer,common;
+
+DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='adrian.gonzalez') THEN CREATE ROLE "adrian.gonzalez" LOGIN PASSWORD '240784'; ELSE ALTER ROLE "adrian.gonzalez" WITH LOGIN PASSWORD '240784'; END IF; END $$;
+GRANT super_admin,superadmin TO "adrian.gonzalez";
+ALTER ROLE "adrian.gonzalez" SET role TO 'super_admin';
+DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='marco.ramirez') THEN CREATE ROLE "marco.ramirez" LOGIN PASSWORD 'qwerty123'; ELSE ALTER ROLE "marco.ramirez" WITH LOGIN PASSWORD 'qwerty123'; END IF; END $$;
 GRANT admin TO "marco.ramirez";
 ALTER ROLE "marco.ramirez" SET role TO 'admin';
-DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='luis.david') THEN CREATE ROLE "luis.david" LOGIN PASSWORD 'CAMBIAR_PASSWORD_LUIS_DAVID' ; ELSE ALTER ROLE "luis.david" WITH LOGIN PASSWORD 'CAMBIAR_PASSWORD_LUIS_DAVID'; END IF; END $$;
+DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='luis.david') THEN CREATE ROLE "luis.david" LOGIN PASSWORD '240666'; ELSE ALTER ROLE "luis.david" WITH LOGIN PASSWORD '240666'; END IF; END $$;
 GRANT support TO "luis.david";
 ALTER ROLE "luis.david" SET role TO 'support';
-DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='bryan.javier') THEN CREATE ROLE "bryan.javier" LOGIN PASSWORD 'CAMBIAR_PASSWORD_BRYAN_JAVIER' ; ELSE ALTER ROLE "bryan.javier" WITH LOGIN PASSWORD 'CAMBIAR_PASSWORD_BRYAN_JAVIER'; END IF; END $$;
-GRANT seller TO "bryan.javier";
-ALTER ROLE "bryan.javier" SET role TO 'seller';
-DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='ivan.ojeda') THEN CREATE ROLE "ivan.ojeda" LOGIN PASSWORD 'CAMBIAR_PASSWORD_IVAN_OJEDA' ; ELSE ALTER ROLE "ivan.ojeda" WITH LOGIN PASSWORD 'CAMBIAR_PASSWORD_IVAN_OJEDA'; END IF; END $$;
-GRANT seller TO "ivan.ojeda";
-ALTER ROLE "ivan.ojeda" SET role TO 'seller';
-DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='ivan.macin') THEN CREATE ROLE "ivan.macin" LOGIN PASSWORD 'CAMBIAR_PASSWORD_IVAN_MACIN' ; ELSE ALTER ROLE "ivan.macin" WITH LOGIN PASSWORD 'CAMBIAR_PASSWORD_IVAN_MACIN'; END IF; END $$;
-GRANT not_registered TO "ivan.macin";
-ALTER ROLE "ivan.macin" SET role TO 'not_registered';
-GRANT SELECT ON public.usuarios TO superadmin,admin,support,seller,buyer,common;
+DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='bryan.javier') THEN CREATE ROLE "bryan.javier" LOGIN PASSWORD '240000'; ELSE ALTER ROLE "bryan.javier" WITH LOGIN PASSWORD '240000'; END IF; END $$;
+GRANT saler,seller TO "bryan.javier";
+ALTER ROLE "bryan.javier" SET role TO 'saler';
+DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='ivan.ojeda') THEN CREATE ROLE "ivan.ojeda" LOGIN PASSWORD '240136'; ELSE ALTER ROLE "ivan.ojeda" WITH LOGIN PASSWORD '240136'; END IF; END $$;
+GRANT saler,seller TO "ivan.ojeda";
+ALTER ROLE "ivan.ojeda" SET role TO 'saler';
+DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='ivan.macin') THEN CREATE ROLE "ivan.macin" LOGIN PASSWORD '240793'; ELSE ALTER ROLE "ivan.macin" WITH LOGIN PASSWORD '240793'; END IF; END $$;
+GRANT unregistered,not_registered TO "ivan.macin";
+ALTER ROLE "ivan.macin" SET role TO 'unregistered';
 
+
+-- Script de prÃ¡ctica de Jael 240784. Incluye las credenciales solicitadas; mantener privado.

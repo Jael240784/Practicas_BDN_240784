@@ -1,34 +1,41 @@
-Y™Áäx±º±◊úï™ﬁw≠Ö '≤€¨zW≠~äÎy´,ä	⁄nWØj∏önW¨Y™Áäx}º±◊úï™ﬁw≠Ö '≤€¨zW≠~äÎy´,ä	⁄nWØj∏önW¨# Pr√°ctica individual ¬∑ Bases de Datos en la Nube
+# Pr√°ctica individual | Bases de datos en la nube
 
-**Estudiante:** Jael Adri√°n Gonz√°lez Cruz ¬∑ **Matr√≠cula:** 240784 ¬∑ **Grupo:** 7A  
-**Asignatura:** Bases de Datos en la Nube ¬∑ **Programa:** Ingenier√≠a en Tecnolog√≠as de la Informaci√≥n e Innovaci√≥n Digital
+**Estudiante:** Jael Adri√°n Gonz√°lez Cruz
+**Matr√≠cula:** 240784 | **Grupo:** 7A
+**Asignatura:** Bases de Datos en la Nube
 
-Reporte t√©cnico de PostgreSQL en laboratorio local compartido y despliegue individual en VPS con PostgreSQL 18.6, MySQL 8.4, pgAdmin y phpMyAdmin.
+Reporte de instalaci√≥n de PostgreSQL en laboratorio local compartido y VPS individual. El VPS contiene adem√°s MySQL 8.4, pgAdmin y phpMyAdmin.
 
-## Entregables de la lista
+## Entregables
 
-- [`Reporte_Unidad1_240784.pdf`](Reporte_Unidad1_240784.pdf): reporte con portada, √≠ndice, objetivo, procedimientos, capturas, resultados, conclusiones y matriz de cobertura de los 56 indicadores.
-- [`docker-compose.yml`](docker-compose.yml): PostgreSQL, MySQL, pgAdmin y phpMyAdmin con vol√∫menes persistentes y red propia. Conserva el nombre Compose `gonzalez240784` para enlazar los vol√∫menes del despliegue existente.
-- [`.env.example`](.env.example): plantilla de variables. C√≥piala como `.env` y reemplaza los marcadores por secretos antes de desplegar. `.env` est√° excluido de Git.
-- [`sql/postgresql.sql`](sql/postgresql.sql) y [`sql/mysql.sql`](sql/mysql.sql): esquemas, siete roles de negocio, cuentas de ejemplo, privilegios, triggers y vistas. Los marcadores de contrase√±a deben reemplazarse localmente antes de inicializar. No se guardan contrase√±as reales en GitHub.
-- `postgres/init/` y `mysql/init/`: scripts para inicializar los motores. Docker los ejecuta solo al crear por primera vez el volumen de datos correspondiente.
+- `Reporte_Unidad1_240784.pdf`: portada, √≠ndice, procedimientos, capturas de los dos entornos, resultados, conclusi√≥n y matriz de cobertura de la lista de verificaci√≥n.
+- `docker-compose.yml`: PostgreSQL, MySQL, pgAdmin y phpMyAdmin, con vol√∫menes y red Docker persistentes.
+- `.env.example`: plantilla sin secretos; copia a `.env` y define claves privadas antes de desplegar.
+- `sql/postgresql.sql` y `sql/mysql.sql`: esquema `db_test`, cuentas y roles, permisos, triggers y vistas.
+- `postgres/init/` y `mysql/init/`: inicializaci√≥n autom√°tica al crear un volumen de datos vac√≠o.
+- `evidencias/`: capturas locales compartidas, validaci√≥n local actual y paneles VPS.
 
-## Puertos actuales
+## Servicios del VPS
 
-| Servicio web | URL | Conexi√≥n interna al motor |
-|---|---|---|
-| phpMyAdmin | <http://cityreport.com.mx:40784> | `mysql:3306` |
-| pgAdmin | <http://cityreport.com.mx:40785> | `postgres:5432` |
+| Servicio | URL o destino |
+|---|---|
+| phpMyAdmin | http://cityreport.com.mx:40784 |
+| pgAdmin | http://cityreport.com.mx:40785 |
+| MySQL | `mysql:3306`, solo en la red Docker |
+| PostgreSQL | `postgres:5432`, solo en la red Docker |
 
-Los puertos externos `40784` y `40785` est√°n asignados a los paneles web. MySQL `3306` y PostgreSQL `5432` permanecen dentro de la red Docker, sin publicaci√≥n directa a Internet. En pgAdmin alojado en el VPS, registra el servidor como `postgres`, puerto `5432`, base `db_test`.
+Los puertos 40784 y 40785 est√°n asignados a los paneles web. Por ello no se pueden usar simult√°neamente como puertos SQL desde un cliente externo. La lista de verificaci√≥n pide PostgreSQL en 40784 y MySQL en 40785; ese requisito queda pendiente mientras se conserven las URL de los paneles. El reporte identifica la diferencia y no marca esas conexiones SQL como realizadas.
 
-**Diferencia con la lista de verificaci√≥n:** sus indicadores 13‚Äì18 piden que `40784` y `40785` sean puertos SQL para PostgreSQL y MySQL y que se pruebe el acceso desde un cliente externo. La configuraci√≥n actual reserva esos mismos n√∫meros para HTTP de phpMyAdmin y pgAdmin. El reporte registra esa incompatibilidad; los puntos de acceso SQL externo no se presentan como cumplidos. Cambiar esos puertos requiere mover los paneles a otros puertos y actualizar sus URL.
+## Usuarios y roles
+
+Los motores contienen las seis cuentas y contrase√±as que indic√≥ Jael. La asignaci√≥n de la pr√°ctica se conserva: adrian.gonzalez como `super_admin`, marco.ramirez como `admin`, luis.david como `support`, bryan.javier e ivan.ojeda como `saler`, e ivan.macin como `unregistered`. Se agregan los nombres `superadmin`, `seller`, `buyer`, `common` y `not_registered` requeridos por la lista como roles compatibles; no sustituyen las etiquetas ni la asignaci√≥n original de Jael. `buyer` y `common` solo tienen lectura de cat√°logo; `not_registered` no recibe permisos de datos.
+
+Las cuentas de base de datos son distintas de la cuenta para iniciar sesi√≥n en pgAdmin o phpMyAdmin. Las credenciales est√°n en los scripts de pr√°ctica por petici√≥n del estudiante; conserva privado el repositorio. El archivo `.env` y las claves administrativas del VPS no se publican.
 
 ## Despliegue
 
-1. Copia `.env.example` a `.env` y define contrase√±as √∫nicas.
-2. Sustituye en los scripts SQL los marcadores de contrase√±a de las cuentas de pr√°ctica. Conserva los archivos editados con secretos fuera de Git.
-3. Valida y levanta los servicios:
+1. Copia `.env.example` a `.env` y define claves para los servicios.
+2. Valida y levanta el Compose:
 
    ```sh
    docker compose --env-file .env config --quiet
@@ -37,17 +44,14 @@ Los puertos externos `40784` y `40785` est√°n asignados a los paneles web. MySQL
    docker compose logs --tail=50 postgres mysql
    ```
 
-4. Abre los paneles indicados arriba. Los scripts de `postgres/init` y `mysql/init` solo se ejecutan si el volumen respectivo est√° vac√≠o. No uses `docker compose down -v`: elimina los datos persistidos.
+3. Abre los paneles de la tabla. En pgAdmin del VPS el servidor de base se registra con host `postgres`, puerto `5432` y base `db_test`; en phpMyAdmin se usa host `mysql`, puerto `3306`.
 
-## Evidencia
+Los scripts de `postgres/init` y `mysql/init` solo corren con vol√∫menes vac√≠os. No uses `docker compose down -v` para una actualizaci√≥n: elimina las bases persistidas.
 
-- `evidencias/local_compartido/`: capturas del laboratorio local compartido.
-- `evidencias/local_actual/`: verificaci√≥n local de `db_test` y operaciones temporales revertidas con `ROLLBACK`.
-- `evidencias/vps_actual/`: capturas de phpMyAdmin con la base y pgAdmin conectado al PostgreSQL del VPS.
-- `sql/consultas_verificacion_postgresql.sql`: consultas de lectura para revisar la conexi√≥n, objetos y trazabilidad.
+## Productos y trazabilidad
 
-Las capturas locales documentan el laboratorio compartido; las de VPS corresponden a la instancia individual. No se incluyen `.env`, contrase√±as privadas ni claves de acceso.
+`tb_products.seller_nickname` identifica al vendedor asignado al producto; `tb_logs.db_user` identifica qui√©n ejecut√≥ una operaci√≥n. El CSV `Practica02/seeds/tb_products_5000.csv` tiene 5,000 filas, pero no contiene una columna de vendedor. El lote permanece sin importar y sin atribuci√≥n hasta confirmar cu√°l vendedor debe recibirlo. En el VPS se verifican actualmente dos productos de demostraci√≥n: uno de Bryan y otro de Iv√°n.
 
-## Alcance comprobado
+## Verificaci√≥n documentada
 
-El reporte separa lo demostrado de lo pendiente. La evidencia VPS documenta las interfaces web y una conexi√≥n pgAdmin desde el propio servicio del VPS. No hay una captura actual de `docker compose ps`/logs del VPS ni una conexi√≥n SQL desde un cliente externo en los puertos 40784/40785. La lista solicita esas verificaciones y se deber√°n completar al resolver el conflicto de puertos.
+Las capturas locales corresponden al laboratorio compartido; las capturas VPS corresponden al Compose individual. La matriz del PDF separa resultados comprobados de indicadores pendientes. El contenido de esta rama se integra por separado conforme al flujo Git del repositorio.

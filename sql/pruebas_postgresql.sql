@@ -1,8 +1,8 @@
-YªçŠx±¼±×œ•ªÞw­…Ê'²Û¬zW­~Šëy«,Š	ÚnW¯j¸šnW¬YªçŠx}¼±×œ•ªÞw­…Ê'²Û¬zW­~Šëy«,Š	ÚnW¯j¸šnW¬-- Diez pruebas de demostraciÃ³n para tb_users, tb_products y sus vistas.
+-- Diez pruebas de demostraciÃ³n para tb_users, tb_products y sus vistas.
 -- Ejecutarlas con la cuenta de administraciÃ³n desde un cliente externo.
 -- Abrir previamente la base db_test desde pgAdmin o psql.
 SELECT nickname,rol FROM tb_users ORDER BY nickname; -- 01
-INSERT INTO tb_users(email,nickname,rol) VALUES ('prueba.usuario@cityreport.local','prueba.usuario','common'); -- 02
+INSERT INTO tb_users(email,nickname,rol) VALUES ('prueba.usuario@cityreport.local','prueba.usuario','unregistered'); -- 02
 UPDATE tb_users SET rol='support' WHERE nickname='prueba.usuario'; -- 03
 SELECT * FROM vw_trazabilidad_usuarios ORDER BY operation_date DESC LIMIT 10; -- 04
 DELETE FROM tb_users WHERE nickname='prueba.usuario'; -- 05
