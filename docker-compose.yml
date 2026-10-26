@@ -1,0 +1,87 @@
+YªçŠx±¼±×œ•ªÞw­…Ê'²Û¬zW­~Šëy«,Š	ÚnW¯j¸šnW¬YªçŠx}¼±×œ•ªÞw­…Ê'²Û¬zW­~Šëy«,Š	ÚnW¯j¸šnW¬name: ${COMPOSE_PROJECT_NAME:-gonzalez240784}
+
+services:
+  postgres:
+    image: postgres:18.6
+    container_name: gonzalez240784_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?define POSTGRES_USER in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?define POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-db_test}
+      PGDATA: /var/lib/postgresql/18/docker
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [jael_net]
+
+  mysql:
+    image: mysql:8.4
+    container_name: gonzalez240784_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?define MYSQL_ROOT_PASSWORD in .env}
+      MYSQL_ROOT_HOST: localhost
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-db_test}
+      MYSQL_USER: ${MYSQL_ADMIN_USER:?define MYSQL_ADMIN_USER in .env}
+      MYSQL_PASSWORD: ${MYSQL_ADMIN_PASSWORD:?define MYSQL_ADMIN_PASSWORD in .env}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+    networks: [jael_net]
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.3-apache
+    container_name: gonzalez240784_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 0
+      UPLOAD_LIMIT: 64M
+    ports:
+      - "40784:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks: [jael_net]
+
+  pgadmin:
+    image: dpage/pgadmin4:9.17
+    container_name: gonzalez240784_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:?define PGADMIN_DEFAULT_EMAIL in .env}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:?define PGADMIN_DEFAULT_PASSWORD in .env}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - "40785:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [jael_net]
+
+volumes:
+  postgres_data:
+    name: gonzalez240784_postgres_data
+  mysql_data:
+    name: gonzalez240784_mysql_data
+  pgadmin_data:
+    name: gonzalez240784_pgadmin_data
+
+networks:
+  jael_net:
+    name: gonzalez240784_net
+
