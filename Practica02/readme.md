@@ -15,14 +15,15 @@ Ejercicio individual de Jael González (240784). Configura cuentas MySQL con rol
 
 ## Compatibilidad con la lista de verificación
 
-El script conserva las asignaciones de Jael y define además los nombres `superadmin`, `seller`, `buyer`, `common` y `not_registered`. Son roles compatibles con la lista; no cambian la etiqueta de aplicación `saler` ni la asignación de `ivan.macin`. El lote CSV no tiene campo de vendedor y queda sin importar hasta recibir una asignación explícita.
+El script conserva las asignaciones de Jael y define además los nombres `superadmin`, `seller`, `buyer`, `common` y `not_registered`. Son roles compatibles con la lista; no cambian la etiqueta de aplicación `saler` ni la asignación de `ivan.macin`. Jael indicó que el lote de 5,000 productos se atribuyera a Bryan; el CSV se importó en PostgreSQL con esa relación.
 
 ## Archivos
 
 - scripts/remote_users_privileges_creation.sql crea las cuentas, actualiza las contraseñas con ALTER USER, aplica roles y sincroniza tb_users y usuarios.
 - queries/consultas_verificacion.sql valida objetos, propietarios de productos, bitácora, vistas y privilegios en el esquema db_test desplegado.
+- evidencias/vps_actual/importacion_productos_bryan_20261026.txt registra la carga PostgreSQL y su recuento final; no es una captura de pantalla.
 - backups/ contiene respaldos propios de la práctica. No ejecutes un respaldo sobre producción sin validar su origen y destino.
-- seeds/tb_products_5000.csv contiene datos de productos; su vendedor debe definirse antes de importarlo.
+- seeds/tb_products_5000.csv contiene los 5,000 productos asignados a Bryan en PostgreSQL mediante `sql/importar_productos_5000_postgresql.sql`.
 
 Las credenciales reales son las indicadas por Jael y se mantienen en el repositorio privado. No cambies la visibilidad del repositorio ni reasignes eventos históricos. seller_nickname indica el vendedor asociado al producto; db_user en la bitácora indica quién ejecutó la operación.
 

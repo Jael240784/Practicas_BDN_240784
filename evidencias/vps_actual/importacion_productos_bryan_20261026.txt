@@ -1,0 +1,37 @@
+REGISTRO DE IMPORTACION POSTGRESQL — VPS JAEL 240784
+Fecha: 2026-10-26
+Base: db_test | Tabla: public.tb_products | Vendedor: bryan.javier
+Origen: Practica02/seeds/tb_products_5000.csv
+Respaldo previo: /home/Gonzalez/backups/db_test_postgres_pre_products5000_20261026.dump
+
+Validación del archivo de origen
+- Filas: 5000
+- IDs: 5000 únicos, rango 8–5007
+- SKU: 5000 únicos
+- Fechas de creación/actualización: 5000 parseables
+- Estado: 301 inactivos y 4699 activos
+
+Primera ejecución del importador transaccional
+COPY 5000
+INSERT 0 5000
+setval: 5007
+productos_bryan_lote: 5000
+COMMIT confirmado
+
+Segunda ejecución para verificar idempotencia
+COPY 5000
+INSERT 0 0
+setval: 5007
+productos_bryan_lote: 5000
+COMMIT confirmado
+
+Conteo final consultado en PostgreSQL
+total | con_sku | bryan | ivan
+5002  | 5000    | 5001  | 1
+
+Eventos de tb_products en tb_logs
+db_user: jael_admin | Create: 5001 | Delete: 1 | Update: 1
+
+Nota: seller_nickname identifica al vendedor dueño del producto. tb_logs.db_user registra
+la cuenta que ejecutó la importación (jael_admin); no se falseó el actor del evento.
+El CSV no contiene category_id; no se inventaron relaciones en tbd_products_categories.

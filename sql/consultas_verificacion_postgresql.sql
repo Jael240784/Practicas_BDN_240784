@@ -25,3 +25,13 @@ ORDER BY nickname;
 SELECT id, name, price, stock, seller_nickname
 FROM public.tb_products
 ORDER BY id;
+
+SELECT seller_nickname, COUNT(*) AS productos
+FROM public.tb_products
+GROUP BY seller_nickname
+ORDER BY seller_nickname;
+
+SELECT COUNT(*) AS productos_con_sku,
+       COUNT(*) FILTER (WHERE status) AS activos,
+       COUNT(*) FILTER (WHERE NOT status) AS inactivos
+FROM public.tb_products;

@@ -12,8 +12,10 @@ Reporte de instalación de PostgreSQL en laboratorio local compartido y VPS indi
 - `docker-compose.yml`: PostgreSQL, MySQL, pgAdmin y phpMyAdmin, con volúmenes y red Docker persistentes.
 - `.env.example`: plantilla sin secretos; copia a `.env` y define claves privadas antes de desplegar.
 - `sql/postgresql.sql` y `sql/mysql.sql`: esquema `db_test`, cuentas y roles, permisos, triggers y vistas.
+- `sql/importar_productos_5000_postgresql.sql`: carga validada e idempotente del lote CSV en PostgreSQL.
 - `postgres/init/` y `mysql/init/`: inicialización automática al crear un volumen de datos vacío.
 - `evidencias/`: capturas locales compartidas, validación local actual y paneles VPS.
+- `evidencias/vps_actual/importacion_productos_bryan_20261026.txt`: transcripción de la carga y su verificación idempotente.
 
 ## Servicios del VPS
 
@@ -50,7 +52,7 @@ Los scripts de `postgres/init` y `mysql/init` solo corren con volúmenes vacíos
 
 ## Productos y trazabilidad
 
-`tb_products.seller_nickname` identifica al vendedor asignado al producto; `tb_logs.db_user` identifica quién ejecutó una operación. El CSV `Practica02/seeds/tb_products_5000.csv` tiene 5,000 filas, pero no contiene una columna de vendedor. El lote permanece sin importar y sin atribución hasta confirmar cuál vendedor debe recibirlo. En el VPS se verifican actualmente dos productos de demostración: uno de Bryan y otro de Iván.
+`tb_products.seller_nickname` identifica al vendedor asignado al producto; `tb_logs.db_user` identifica quién ejecutó una operación. Por indicación de Jael, las 5,000 filas de `Practica02/seeds/tb_products_5000.csv` se importaron en PostgreSQL y quedaron atribuidas a `bryan.javier`. El importador conserva SKU, estado y fechas, valida IDs/SKU y evita duplicados. En el VPS hay 5,001 productos de Bryan (incluida una fila de demostración) y 1 de Iván Ojeda. Para repetir la carga, copiar el CSV al contenedor como `/tmp/tb_products_5000.csv` y ejecutar el script como `jael_admin`.
 
 ## Verificación documentada
 
