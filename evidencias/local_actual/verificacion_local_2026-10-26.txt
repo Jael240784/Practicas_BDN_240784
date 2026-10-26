@@ -1,0 +1,55 @@
+LOCAL · PostgreSQL 18.6 · evidencia de verificacion en db_test
+Fecha: 2026-10-26
+Endpoint: 127.0.0.1:40784 · base: db_test
+Las escrituras se hicieron dentro de una transaccion y se descartaron con ROLLBACK.
+
+Pager usage is off.
+BEGIN
+  base   |  usuario   |   host    | puerto 
+---------+------------+-----------+--------
+ db_test | jael_admin | 127.0.0.1 |  40784
+(1 row)
+
+ usuarios_iniciales 
+--------------------
+                  6
+(1 row)
+
+INSERT 0 1
+UPDATE 1
+ id | table_name | operation |  db_user   |                        description                         
+----+------------+-----------+------------+------------------------------------------------------------
+ 39 | tb_users   | Create    | jael_admin | Create en tb_users id=14 nombre=temp_local_240784_20261026
+ 40 | tb_users   | Update    | jael_admin | Update en tb_users id=14 nombre=temp_local_240784_20261026
+(2 rows)
+
+DELETE 1
+ productos_iniciales 
+---------------------
+                   2
+(1 row)
+
+INSERT 0 1
+UPDATE 1
+ table_name  | operation |  db_user   |                         description                          
+-------------+-----------+------------+--------------------------------------------------------------
+ tb_products | Create    | jael_admin | Create en tb_products id=9 nombre=TEMP LOCAL 240784 20261026
+ tb_products | Update    | jael_admin | Update en tb_products id=9 nombre=TEMP LOCAL 240784 20261026
+(2 rows)
+
+DELETE 1
+ROLLBACK
+     tabla      | filas 
+----------------+-------
+ tb_logs        |     0
+ tb_products    |     2
+ tb_users       |     6
+ tbc_categories |     2
+(4 rows)
+
+           vista           
+---------------------------
+ vw_trazabilidad_productos
+ vw_trazabilidad_usuarios
+(2 rows)
+
