@@ -1,31 +1,28 @@
-# Manual de instalación de PostgreSQL · Local y VPS
+# Manual de instalación · Bases de Datos en la Nube
 
-**Universidad Tecnológica de Xicotepec de Juárez**  
 **Estudiante:** Jael Adrián González Cruz · **Matrícula:** 240784 · **Grupo:** 7A  
-**Programa:** Ingeniería en Tecnologías de la Información e Innovación Digital  
-**Asignatura:** Bases de Datos en la Nube · **Docente:** M.T.I. Marco Antonio Ramírez Hernández
+**Asignatura:** Bases de Datos en la Nube · **Programa:** Ingeniería en Tecnologías de la Información e Innovación Digital
 
-Guía de instalación, configuración y verificación de PostgreSQL con Docker Compose en el equipo local compartido y en el VPS individual. Incluye pgAdmin, MySQL y phpMyAdmin en el VPS, roles, vistas, respaldos y pruebas reversibles.
+Este entregable documenta PostgreSQL en el laboratorio local y en el VPS individual, además de MySQL 8.4 y sus paneles web en el VPS. Incluye portada, índice, objetivo, pasos de instalación y configuración, consultas, persistencia, capturas y una matriz de cobertura de la lista de cotejo.
 
-## Manual completo
+## PDF
 
-[**Abrir o descargar el PDF**](Manual_PostgreSQL_Local_y_VPS_240784.pdf)
+[Descargar el manual completo](Manual_PostgreSQL_Local_y_VPS_240784.pdf)
 
-## Acceso actual
+## Entornos documentados
 
-| Servicio | Acceso | Red/puerto del contenedor |
-|---|---|---|
-| PostgreSQL VPS | Solo desde la red Docker; pgAdmin usa `postgres` | `postgres:5432` |
-| MySQL VPS | Solo desde la red Docker; phpMyAdmin usa `mysql` | `mysql:3306` |
-| phpMyAdmin | http://cityreport.com.mx:40784 | `80/tcp` |
-| pgAdmin | http://cityreport.com.mx:40785 | `80/tcp` |
-| PostgreSQL local | `127.0.0.1:5432` | `5432/tcp` |
-| pgAdmin local | `http://localhost:8080` | `80/tcp` |
+| Entorno / servicio | Dirección o configuración |
+|---|---|
+| Laboratorio local compartido | PostgreSQL con Docker Compose y pgAdmin |
+| Validación local adicional | PostgreSQL 18.6 · `127.0.0.1:40784` · `db_test`; transacción de prueba revertida con `ROLLBACK` |
+| PostgreSQL en VPS | pgAdmin web: <http://cityreport.com.mx:40785> · motor `postgres:5432` interno |
+| MySQL en VPS | phpMyAdmin web: <http://cityreport.com.mx:40784> · motor `mysql:3306` interno |
 
-Los puertos públicos `40784` y `40785` corresponden a los paneles web. Los motores de base de datos no publican puertos SQL al host. El VPS permite actualmente el acceso web desde cualquier IP; limita el origen de esas reglas a IP confiables para uso continuo.
+Los dos paneles web respondieron HTTP 200 el 26/10/2026. Esa comprobación confirma que cargan sus interfaces, no que se haya autenticado con cada cuenta ni que los puertos SQL sean accesibles desde Internet. No se publican contraseñas ni archivos `.env`.
 
-> Las credenciales y secretos se omiten del repositorio. Las capturas de pruebas SQL del VPS identifican la configuración anterior al cambio de puertos; el panel y el despliegue descritos reflejan la configuración actual.
+## Alcance y estado de la evidencia
 
----
-
-**Bases de Datos en la Nube · Unidad 1 · 2026**
+- Las capturas del laboratorio local son compartidas; las capturas señaladas como VPS corresponden al entorno individual documentado.
+- La validación local adicional confirmó seis tablas, dos vistas y operaciones de prueba sobre `db_test`; los cambios de prueba se revirtieron.
+- La matriz del PDF distingue los resultados documentados de los puntos pendientes. Los accesos SQL externos a 40784/40785 no están habilitados porque esos puertos corresponden a phpMyAdmin y pgAdmin.
+- La fusión con `main` permanece pendiente para conservar separada la rama `Manual_VPS_BDs_Relacionales`.
