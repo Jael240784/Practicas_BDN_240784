@@ -23,10 +23,10 @@ Los puertos `40784` y `40785` son HTTP para los paneles. Los puertos SQL `3306` 
 
 - `evidencias/local_compartido/`: capturas del laboratorio compartido que aparecen en el manual.
 - `evidencias/local_actual/`: transcripción de verificación PostgreSQL y consulta de referencia; la transcripción registra pruebas revertidas con `ROLLBACK`.
-- `evidencias/vps_actual/`: capturas actuales de DNS, phpMyAdmin y pgAdmin del VPS individual.
+- `evidencias/vps_actual/`: capturas de phpMyAdmin con `db_test` y pgAdmin conectado al PostgreSQL del VPS.
 - `sql/consultas_verificacion_postgresql.sql`: consultas de solo lectura para revisar conexión, tablas, vistas, usuarios y productos en `db_test`.
 
-Las capturas locales representan el equipo compartido. Las capturas del VPS muestran la instancia individual documentada. No se incluyen archivos `.env`, contraseñas, ni datos privados de acceso.
+Las capturas locales representan el equipo compartido. Las capturas del VPS muestran la instancia individual documentada. No se incluyen archivos `.env`, contraseñas ni datos privados de acceso.
 
 ## Estado y alcance
 
