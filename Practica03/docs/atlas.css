@@ -82,3 +82,24 @@ th{color:var(--accent)}
 .model-controls select{font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:.45rem;padding:.45rem}
 .model-frame{display:block;width:100%;height:min(75vh,46rem);min-height:24rem;border:1px solid var(--line);border-radius:.75rem;background:var(--surface)}
 @media(max-width:48rem){.atlas-home .catalog-side{max-height:none}.catalog-side .atlas-sections{display:flex;flex-wrap:wrap}}
+
+.atlas-home{gap:clamp(1rem,2.5vw,2.4rem);grid-template-columns:minmax(12rem,15rem) minmax(0,1fr)}
+.atlas-home .atlas-intro{grid-template-columns:minmax(0,1fr) auto;align-items:end;margin-bottom:1rem}
+.atlas-intro .actions{justify-content:flex-end}
+.atlas-intro p:not(.eyebrow){margin-bottom:0;max-width:60ch}
+.atlas-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem}
+.atlas-metrics a{display:grid;gap:.15rem;padding:.8rem 1rem;border:1px solid var(--line);border-radius:.7rem;background:var(--surface);text-decoration:none}
+.atlas-metrics a:hover{border-color:var(--accent)}
+.atlas-metrics strong{font-size:1.65rem;line-height:1.15;color:var(--accent)}
+.atlas-metrics span{color:var(--text);font-size:.88rem}
+.atlas-panel{margin-top:1.1rem;padding:clamp(.85rem,2vw,1.4rem);border:1px solid var(--line);border-radius:.85rem;scroll-margin-top:1rem;background:var(--surface)}
+.atlas-panel h2{margin:0}
+.atlas-panel>p{color:var(--muted);margin:.65rem 0 1rem}
+.inventory-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.65rem}
+.inventory-head label{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;font-size:.88rem}
+.inventory-head input{max-width:100%;padding:.4rem .6rem;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:.45rem}
+.inventory-group{background:var(--bg)}
+.inventory-group li[hidden]{display:none}
+.inventory-group [data-row-count]{padding:0 .45rem;border:1px solid var(--line);border-radius:4rem;font-size:.8rem}
+@media(max-width:65rem){.atlas-home .atlas-intro{grid-template-columns:1fr}.atlas-intro .actions{justify-content:flex-start}}
+@media(max-width:38rem){.atlas-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
