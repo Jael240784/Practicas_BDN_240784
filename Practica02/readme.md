@@ -26,4 +26,4 @@ Configura las cuentas, roles y privilegios de la base de datos del proyecto. La 
 | [backups](backups/) | Respaldos históricos |
 | [seeds](seeds/) | Lote de productos de prueba |
 
-Consulta el [Compose y las evidencias del VPS](../README.md#infraestructura-y-evidencias) para identificar el destino de la conexión.
+Consulta el [Compose y las evidencias del VPS](../Unidad01/README.md) para identificar el destino de la conexión.
