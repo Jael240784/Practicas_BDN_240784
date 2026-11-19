@@ -1,29 +1,35 @@
-# Bases de Datos en la Nube
+<p align="center">
+  <img src=".github/assets/bdn-portada.png" alt="Bases de Datos en la Nube · Jael Adrián González Cruz · 240784 · Grupo 7A" width="1200">
+</p>
 
-**Jael Adrián González Cruz · 240784 · Grupo 7A**
-
-Ingeniería en Tecnologías de la Información e Innovación Digital
-
-**Asignatura** Optativa I · Septiembre–diciembre de 2026
-
-**Docente** M.T.I. Marco A. Ramírez Hernández
+<p align="center">
+  <a href="https://jael240784.github.io/Practicas_BDN_240784/"><strong>Abrir el atlas MySQL</strong></a>
+  · <a href="Practica04/README.md#resultados-comprobados">Ver resultados de compra</a>
+  · <a href="Unidad01/README.md">Consultar infraestructura</a>
+</p>
 
 ## Prácticas y entregables
 
-| Práctica | Objetivo | Evidencia |
-|---|---|---|
-| [02 · Conexiones remotas](Practica02/readme.md) | Configurar cuentas, roles y permisos para conexiones SQL. | [Matriz de accesos](Practica02/readme.md#usuarios-remotos-y-roles) y [consultas de verificación](Practica02/queries/consultas_verificacion.sql). |
-| [03 · Manipulación de datos](Practica03/README.md) | Ampliar el esquema de comercio con relaciones, procedimientos, eventos y datos de prueba. | [Diccionario MySQL](Practica03/docs/diccionario.md), [modelos EER](Practica03/docs/index.html) y [verificación de lotes](Practica03/queries/verify_user_batches.sql). |
-| [04 · Simulación de compras](Practica04/README.md) | Ejecutar cinco casos de compra y comprobar pagos, incidencias y trazabilidad. | [Resultados por pedido](Practica04/README.md#resultados-comprobados) y [consultas de auditoría](Practica04/queries/verify_cases.sql). |
+| Práctica | Trabajo realizado | Evidencia para revisar |
+|:---|:---|:---|
+| [**02 · Conexiones remotas**](Practica02/readme.md) | Configuración de cuentas, roles y privilegios en SQL. | [Matriz de accesos](Practica02/readme.md#usuarios-remotos-y-roles) · [Consultas SQL](Practica02/queries/consultas_verificacion.sql) |
+| [**03 · Manipulación de datos**](Practica03/README.md) | Esquema MySQL para comercio, carga de perfiles y auditoría de inventario. | [Modelo EER](https://jael240784.github.io/Practicas_BDN_240784/mere.html) · [Verificación de lotes](Practica03/queries/verify_user_batches.sql) |
+| [**04 · Simulación de compras**](Practica04/README.md) | Cinco escenarios con pagos, envíos, cancelaciones y devoluciones. | [Resultados por pedido](Practica04/README.md#resultados-comprobados) · [Consultas de auditoría](Practica04/queries/verify_cases.sql) |
 
-## Diccionario y modelo relacional
+## Explora el modelo de datos
 
-> **Atlas de db_test**
+> El atlas documenta **25 tablas, 223 columnas y 39 claves foráneas** de `db_test`. Busca una columna, abre su dominio en el modelo relacional y consulta los escenarios de compra que usan el esquema.
 
-> Consulta tablas, columnas y claves, navega los modelos por dominio y revisa los resultados de los cinco casos de compra.
+| [Diccionario interactivo](https://jael240784.github.io/Practicas_BDN_240784/diccionario.html) | [Modelos por dominio](https://jael240784.github.io/Practicas_BDN_240784/#modelos) | [Casos de prueba](https://jael240784.github.io/Practicas_BDN_240784/#casos) |
+|:---|:---|:---|
+| Tipos, nulabilidad y claves | Identidad, catálogo, compra, pagos, entrega y posventa | Pedidos y resultados documentados |
 
-[**Abrir el atlas**](https://jael240784.github.io/Practicas_BDN_240784/) · [Buscar tablas y columnas](https://jael240784.github.io/Practicas_BDN_240784/diccionario.html) · [Ver el modelo completo](https://jael240784.github.io/Practicas_BDN_240784/mere.html)
+## Entorno del laboratorio
 
-## Infraestructura
+La [Unidad 1](Unidad01/README.md) reúne Docker Compose, la configuración inicial de MySQL y PostgreSQL, el informe de instalación y las evidencias de las conexiones.
 
-La [Unidad 1](Unidad01/README.md) reúne el manual de instalación, Docker Compose, los scripts iniciales y las evidencias del laboratorio. Las prácticas 03 y 04 documentan el esquema MySQL del VPS.
+---
+
+**Ingeniería en Tecnologías de la Información e Innovación Digital**
+
+Optativa I · Septiembre–diciembre de 2026 · Docente M.T.I. Marco A. Ramírez Hernández

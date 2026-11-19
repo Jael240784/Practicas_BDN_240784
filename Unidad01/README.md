@@ -1,5 +1,11 @@
 # Unidad 1 · Infraestructura y conexiones
 
+[Inicio](../README.md) · [Conexiones remotas](../Practica02/readme.md) · [Manipulación de datos](../Practica03/README.md) · [Simulación de compras](../Practica04/README.md) · [Atlas MySQL](https://jael240784.github.io/Practicas_BDN_240784/)
+
+> **Entrega** · Instalación de MySQL y PostgreSQL, configuración con Compose y evidencia de conexión.
+
+---
+
 | Recurso | Contenido |
 |---|---|
 | [Docker Compose](docker-compose.yml) | MySQL, PostgreSQL, phpMyAdmin y pgAdmin |

@@ -1,5 +1,11 @@
 # Práctica 02 · Conexiones remotas a bases de datos relacionales
 
+[Inicio](../README.md) · [Conexiones remotas](../Practica02/readme.md) · [Manipulación de datos](../Practica03/README.md) · [Simulación de compras](../Practica04/README.md) · [Atlas MySQL](https://jael240784.github.io/Practicas_BDN_240784/)
+
+> **Entrega** · Matriz de roles, scripts de acceso, consultas de comprobación y respaldos SQL.
+
+---
+
 ## Descripción
 
 Configura las cuentas, roles y privilegios de la base de datos del proyecto. La matriz de cuentas aparece en esta guía para que las demás prácticas puedan enlazarla.

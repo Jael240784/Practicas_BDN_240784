@@ -1,5 +1,11 @@
 # Práctica 03 · Manipulación de datos en conexiones remotas
 
+[Inicio](../README.md) · [Conexiones remotas](../Practica02/readme.md) · [Manipulación de datos](../Practica03/README.md) · [Simulación de compras](../Practica04/README.md) · [Atlas MySQL](https://jael240784.github.io/Practicas_BDN_240784/)
+
+> **Entrega** · Esquema de comercio, carga por lotes, evento de inventario y modelos relacionales.
+
+---
+
 ## Descripción
 
 La práctica amplía el esquema MySQL `db_test` a 25 tablas, 72 triggers y 25 vistas. Incluye la carga de 7,500 cuentas y perfiles, la clasificación de productos y la auditoría de inventario.
