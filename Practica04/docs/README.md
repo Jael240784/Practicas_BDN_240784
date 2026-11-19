@@ -6,3 +6,4 @@ Los pedidos oficiales son 2, 3, 5, 6 y 7. El pedido 4 corresponde a una ejecuci�
 
 - [Consultas de validación](../queries/verify_cases.sql)
 - [Diccionario y diagramas](../../Practica03/docs/index.html)
+- [Cobertura de auditoría por tabla](../queries/verify_audit_coverage.sql)

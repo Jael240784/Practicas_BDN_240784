@@ -69,6 +69,16 @@ Comprueba el registro del pago y el seguimiento del envío. La resolución del c
 
 Comprueba el estado final de la orden y del método asociado al cupón. Contrasta ambos con la ausencia de un cobro para el pedido.
 
+## Verificación del esquema y los triggers
+
+La simulación usa las **25 tablas** documentadas en el [Atlas MySQL](https://jael240784.github.io/Practicas_BDN_240784/#tablas). Los scripts declaran **72 triggers de auditoría**. Cada una de las 24 tablas operativas tiene `AFTER INSERT`, `AFTER UPDATE` y `AFTER DELETE`. `tb_logs` recibe la auditoría y queda excluida del requisito.
+
+1. Aplica la [auditoría de categorías y productos por categoría](../Practica03/scripts/03_trace_categories.sql) después de preparar el esquema de la Práctica 03.
+2. Ejecuta la [verificación de cobertura](queries/verify_audit_coverage.sql) en el VPS con una cuenta que pueda consultar todos los triggers de `db_test`. Espera una fila por tabla del modelo, un trigger por evento en las 24 tablas operativas y cero en `tb_logs`.
+3. Ejecuta las [consultas de verificación de los casos](queries/verify_cases.sql) y contrasta los pedidos con la bitácora y el actor registrado.
+
+Las cifras del repositorio describen los scripts versionados. Guarda la salida de las consultas como evidencia de lo que está instalado y ejecutado en el VPS.
+
 ## Ruta de auditoría
 
 | Evidencia | Tablas |
