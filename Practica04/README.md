@@ -1,8 +1,10 @@
 # Práctica 04 · Simulación de compras y transacciones
 
-[Inicio](../README.md) · [Conexiones remotas](../Practica02/readme.md) · [Manipulación de datos](../Practica03/README.md) · [Simulación de compras](../Practica04/README.md) · [Atlas MySQL](https://jael240784.github.io/Practicas_BDN_240784/)
+[Inicio del repositorio](../README.md) / **Simulación de compras**
 
 > **Entrega** · Cinco escenarios de compra, resultados por pedido y consultas de auditoría.
+
+**En esta guía** · [Ejecución](#instalación-y-ejecución) · [Resultados](#resultados-comprobados) · [Auditoría](#ruta-de-auditoría)
 
 ---
 

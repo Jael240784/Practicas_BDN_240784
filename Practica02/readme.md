@@ -1,8 +1,10 @@
 # Práctica 02 · Conexiones remotas a bases de datos relacionales
 
-[Inicio](../README.md) · [Conexiones remotas](../Practica02/readme.md) · [Manipulación de datos](../Practica03/README.md) · [Simulación de compras](../Practica04/README.md) · [Atlas MySQL](https://jael240784.github.io/Practicas_BDN_240784/)
+[Inicio del repositorio](../README.md) / **Conexiones remotas**
 
 > **Entrega** · Matriz de roles, scripts de acceso, consultas de comprobación y respaldos SQL.
+
+**En esta guía** · [Roles y cuentas](#usuarios-remotos-y-roles) · [Cómo verificar](#cómo-verificar-el-acceso) · [Evidencia](#evidencia-para-la-entrega)
 
 ---
 

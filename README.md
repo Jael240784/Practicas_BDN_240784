@@ -8,6 +8,12 @@
   · <a href="Unidad01/README.md">Consultar infraestructura</a>
 </p>
 
+## Ruta de revisión
+
+1. **Conecta** al entorno con las cuentas y roles de la [Práctica 02](Practica02/readme.md).
+2. **Explora** las entidades y relaciones de la [Práctica 03](Practica03/README.md).
+3. **Comprueba** los cinco pedidos y su trazabilidad en la [Práctica 04](Practica04/README.md).
+
 ## Prácticas y entregables
 
 | Práctica | Trabajo realizado | Evidencia para revisar |

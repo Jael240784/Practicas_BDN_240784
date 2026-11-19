@@ -12,8 +12,8 @@
 <article class="entity" id="tb_buyer_orders"><h2>tb_buyer_orders</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_buyer_orders"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>buyer_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
-<tr><td>seller_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>buyer_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
+<tr><td>seller_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
 <tr><td>subtotal</td><td>decimal(12,2)</td><td>NO</td><td>0.00</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>shipping_cost</td><td>decimal(12,2)</td><td>NO</td><td>0.00</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>fulfillment_status</td><td>enum(&#x27;Pending&#x27;,&#x27;Accepted&#x27;,&#x27;Preparing&#x27;,&#x27;Sent&#x27;,&#x27;Delivered&#x27;,&#x27;Canceled&#x27;,&#x27;Returned&#x27;)</td><td>NO</td><td>Pending</td><td>—</td><td>—</td><td>—</td></tr>
@@ -23,8 +23,8 @@
 <article class="entity" id="tb_cancellations"><h2>tb_cancellations</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_cancellations"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>buyer_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
-<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>buyer_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_buyer_orders">tb_buyer_orders.ID</a></td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
 <tr><td>cancellation_reason</td><td>varchar(500)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>cancellation_status</td><td>enum(&#x27;Requested&#x27;,&#x27;Approved&#x27;,&#x27;Rejected&#x27;,&#x27;Completed&#x27;)</td><td>NO</td><td>Requested</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>requested_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
@@ -37,7 +37,7 @@
 <article class="entity" id="tb_carts"><h2>tb_carts</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_carts"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
 <tr><td>status</td><td>bit(1)</td><td>YES</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
 <tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
@@ -55,9 +55,9 @@
 <article class="entity" id="tb_payment_methods"><h2>tb_payment_methods</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_payment_methods"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
-<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
-<tr><td>payment_method_type_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tbc_payment_methods_types.ID</td></tr>
+<tr><td>order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_buyer_orders">tb_buyer_orders.ID</a></td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
+<tr><td>payment_method_type_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tbc_payment_methods_types">tbc_payment_methods_types.ID</a></td></tr>
 <tr><td>payment_reference</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>amount</td><td>decimal(12,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>currency</td><td>char(3)</td><td>NO</td><td>MXN</td><td>—</td><td>—</td><td>—</td></tr>
@@ -71,7 +71,7 @@
 <article class="entity" id="tb_payment_transactions"><h2>tb_payment_transactions</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_payment_transactions"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>payment_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_payments.ID</td></tr>
+<tr><td>payment_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_payments">tb_payments.ID</a></td></tr>
 <tr><td>event_type</td><td>enum(&#x27;Created&#x27;,&#x27;Authorized&#x27;,&#x27;Captured&#x27;,&#x27;Failed&#x27;,&#x27;Refunded&#x27;,&#x27;PartiallyRefunded&#x27;)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>amount</td><td>decimal(12,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>event_reference</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -81,7 +81,7 @@
 <article class="entity" id="tb_payments"><h2>tb_payments</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_payments"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
+<tr><td>order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_buyer_orders">tb_buyer_orders.ID</a></td></tr>
 <tr><td>amount</td><td>decimal(12,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>currency</td><td>char(3)</td><td>NO</td><td>MXN</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>payment_method</td><td>enum(&#x27;Card&#x27;,&#x27;SPEI&#x27;,&#x27;Transfer&#x27;,&#x27;Cash&#x27;)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -95,7 +95,7 @@
 <article class="entity" id="tb_people"><h2>tb_people</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_people"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>user_id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>user_id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
 <tr><td>given_names</td><td>varchar(150)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>paternal_surname</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>maternal_surname</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -120,9 +120,9 @@
 <article class="entity" id="tb_refunds"><h2>tb_refunds</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_refunds"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>payment_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_payments.ID</td></tr>
-<tr><td>cancellation_ID</td><td>int unsigned</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td>tb_cancellations.ID</td></tr>
-<tr><td>return_ID</td><td>int unsigned</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td>tb_returns.ID</td></tr>
+<tr><td>payment_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_payments">tb_payments.ID</a></td></tr>
+<tr><td>cancellation_ID</td><td>int unsigned</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_cancellations">tb_cancellations.ID</a></td></tr>
+<tr><td>return_ID</td><td>int unsigned</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_returns">tb_returns.ID</a></td></tr>
 <tr><td>amount</td><td>decimal(12,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>currency</td><td>char(3)</td><td>NO</td><td>MXN</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>refund_reason</td><td>varchar(500)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -138,9 +138,9 @@
 <article class="entity" id="tb_returns"><h2>tb_returns</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_returns"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>buyer_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
-<tr><td>order_item_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tbd_order_items.ID</td></tr>
-<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>buyer_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_buyer_orders">tb_buyer_orders.ID</a></td></tr>
+<tr><td>order_item_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tbd_order_items">tbd_order_items.ID</a></td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
 <tr><td>quantity</td><td>int unsigned</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>return_reason</td><td>varchar(500)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>return_status</td><td>enum(&#x27;Requested&#x27;,&#x27;Authorized&#x27;,&#x27;Rejected&#x27;,&#x27;InTransit&#x27;,&#x27;Received&#x27;,&#x27;Inspected&#x27;,&#x27;Completed&#x27;)</td><td>NO</td><td>Requested</td><td>—</td><td>—</td><td>—</td></tr>
@@ -155,8 +155,8 @@
 <article class="entity" id="tb_shipments"><h2>tb_shipments</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_shipments"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>buyer_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
-<tr><td>address_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_user_addresses.ID</td></tr>
+<tr><td>buyer_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_buyer_orders">tb_buyer_orders.ID</a></td></tr>
+<tr><td>address_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_user_addresses">tb_user_addresses.ID</a></td></tr>
 <tr><td>carrier</td><td>varchar(100)</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td>—</td></tr>
 <tr><td>tracking_number</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>shipping_cost</td><td>decimal(12,2)</td><td>NO</td><td>0.00</td><td>—</td><td>—</td><td>—</td></tr>
@@ -171,7 +171,7 @@
 <article class="entity" id="tb_user_addresses"><h2>tb_user_addresses</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tb_user_addresses"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
 <tr><td>address_label</td><td>varchar(100)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>recipient_name</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>recipient_phone</td><td>varchar(25)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -198,7 +198,7 @@
 <tr><td>id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
 <tr><td>name</td><td>varchar(100)</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td>—</td></tr>
 <tr><td>description</td><td>text</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-<tr><td>parent_category_id</td><td>bigint unsigned</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td>tbc_categories.id</td></tr>
+<tr><td>parent_category_id</td><td>bigint unsigned</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tbc_categories">tbc_categories.id</a></td></tr>
 <tr><td>status</td><td>tinyint(1)</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>created_at</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
 <tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -219,15 +219,15 @@
 <tr><td>value</td><td>varchar(255)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>component_type</td><td>varchar(50)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
-<tr><td>address_sup_ID</td><td>bigint unsigned</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>tbd_address_components.ID</td></tr>
+<tr><td>address_sup_ID</td><td>bigint unsigned</td><td>YES</td><td>—</td><td>—</td><td>—</td><td><a href="#tbd_address_components">tbd_address_components.ID</a></td></tr>
 <tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
 <tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
 </table></div></article>
 <article class="entity" id="tbd_cancellation_items"><h2>tbd_cancellation_items</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tbd_cancellation_items"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>cancellation_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_cancellations.ID</td></tr>
-<tr><td>order_item_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tbd_order_items.ID</td></tr>
+<tr><td>cancellation_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_cancellations">tb_cancellations.ID</a></td></tr>
+<tr><td>order_item_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tbd_order_items">tbd_order_items.ID</a></td></tr>
 <tr><td>quantity</td><td>int unsigned</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>unit_amount</td><td>decimal(12,2)</td><td>NO</td><td>0.00</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>item_reason</td><td>varchar(500)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -237,17 +237,17 @@
 </table></div></article>
 <article class="entity" id="tbd_carts_items"><h2>tbd_carts_items</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tbd_carts_items"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
-<tr><td>cart_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_carts.ID</td></tr>
-<tr><td>provider_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tbd_products_users_providers.user_ID</td></tr>
-<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tbd_products_users_providers.product_ID</td></tr>
+<tr><td>cart_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td><a href="#tb_carts">tb_carts.ID</a></td></tr>
+<tr><td>provider_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td><a href="#tbd_products_users_providers">tbd_products_users_providers.user_ID</a></td></tr>
+<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td><a href="#tbd_products_users_providers">tbd_products_users_providers.product_ID</a></td></tr>
 <tr><td>quantity</td><td>int</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
 </table></div></article>
 <article class="entity" id="tbd_order_items"><h2>tbd_order_items</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tbd_order_items"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>seller_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
-<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_products.id</td></tr>
+<tr><td>seller_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_buyer_orders">tb_buyer_orders.ID</a></td></tr>
+<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_products">tb_products.id</a></td></tr>
 <tr><td>product_name</td><td>varchar(255)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>quantity</td><td>int unsigned</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>unit_price</td><td>decimal(12,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -256,16 +256,16 @@
 </table></div></article>
 <article class="entity" id="tbd_products_categories"><h2>tbd_products_categories</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tbd_products_categories"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
-<tr><td>product_id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_products.id</td></tr>
-<tr><td>category_id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tbc_categories.id</td></tr>
+<tr><td>product_id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td><a href="#tb_products">tb_products.id</a></td></tr>
+<tr><td>category_id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td><a href="#tbc_categories">tbc_categories.id</a></td></tr>
 <tr><td>status</td><td>tinyint(1)</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>created_at</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
 <tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 </table></div></article>
 <article class="entity" id="tbd_products_users_providers"><h2>tbd_products_users_providers</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tbd_products_users_providers"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
-<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_users.id</td></tr>
-<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_products.id</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
+<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td><a href="#tb_products">tb_products.id</a></td></tr>
 <tr><td>type_ownership</td><td>enum(&#x27;Owner&#x27;,&#x27;Reseller&#x27;,&#x27;Distributor&#x27;)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>avalaible_date</td><td>datetime</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -275,8 +275,8 @@
 <article class="entity" id="tbd_return_items"><h2>tbd_return_items</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tbd_return_items"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>return_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_returns.ID</td></tr>
-<tr><td>order_item_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tbd_order_items.ID</td></tr>
+<tr><td>return_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_returns">tb_returns.ID</a></td></tr>
+<tr><td>order_item_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tbd_order_items">tbd_order_items.ID</a></td></tr>
 <tr><td>quantity</td><td>int unsigned</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>unit_amount</td><td>decimal(12,2)</td><td>NO</td><td>0.00</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>item_reason</td><td>varchar(500)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -288,8 +288,8 @@
 <article class="entity" id="tbd_user_payment_methods"><h2>tbd_user_payment_methods</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tbd_user_payment_methods"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
 <tr><td>ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
-<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
-<tr><td>payment_method_type_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tbc_payment_methods_types.ID</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
+<tr><td>payment_method_type_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td><a href="#tbc_payment_methods_types">tbc_payment_methods_types.ID</a></td></tr>
 <tr><td>provider</td><td>varchar(60)</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>—</td></tr>
 <tr><td>provider_method_ref</td><td>varchar(255)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>label</td><td>varchar(100)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
@@ -301,8 +301,8 @@
 </table></div></article>
 <article class="entity" id="tbd_users_wishlist_products"><h2>tbd_users_wishlist_products</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Columnas de tbd_users_wishlist_products"><table>
 <tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
-<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_users.id</td></tr>
-<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_products.id</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td><a href="#tb_users">tb_users.id</a></td></tr>
+<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td><a href="#tb_products">tb_products.id</a></td></tr>
 <tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
 <tr><td>last_update</td><td>datetime</td><td>NO</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
@@ -327,6 +327,10 @@ function update() {
 }
 document.querySelector('.lookup').hidden = false;
 filter.addEventListener('input', update);
+window.addEventListener('hashchange', () => {
+  const target = document.getElementById(location.hash.slice(1));
+  if (target?.hidden) { filter.value = ''; update(); target.scrollIntoView(); }
+});
 document.querySelector('#clear').addEventListener('click', () => { filter.value = ''; update(); filter.focus(); });
 update();
 </script>

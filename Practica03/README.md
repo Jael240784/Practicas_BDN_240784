@@ -1,8 +1,10 @@
 # Práctica 03 · Manipulación de datos en conexiones remotas
 
-[Inicio](../README.md) · [Conexiones remotas](../Practica02/readme.md) · [Manipulación de datos](../Practica03/README.md) · [Simulación de compras](../Practica04/README.md) · [Atlas MySQL](https://jael240784.github.io/Practicas_BDN_240784/)
+[Inicio del repositorio](../README.md) / **Manipulación de datos**
 
 > **Entrega** · Esquema de comercio, carga por lotes, evento de inventario y modelos relacionales.
+
+**En esta guía** · [Procedimientos](#procedimientos-y-automatización) · [Orden de preparación](#orden-de-preparación) · [Lectura del modelo](#lectura-del-modelo)
 
 ---
 

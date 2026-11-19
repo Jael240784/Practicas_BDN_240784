@@ -1,10 +1,14 @@
 # Unidad 1 · Infraestructura y conexiones
 
-[Inicio](../README.md) · [Conexiones remotas](../Practica02/readme.md) · [Manipulación de datos](../Practica03/README.md) · [Simulación de compras](../Practica04/README.md) · [Atlas MySQL](https://jael240784.github.io/Practicas_BDN_240784/)
+[Inicio del repositorio](../README.md) / **Infraestructura**
 
 > **Entrega** · Instalación de MySQL y PostgreSQL, configuración con Compose y evidencia de conexión.
 
+**En esta guía** · [Instalación](#instalación-y-validación) · [Reporte](Reporte_Unidad1_240784.pdf) · [Evidencias](evidencias/)
+
 ---
+
+## Instalación y validación
 
 | Recurso | Contenido |
 |---|---|
