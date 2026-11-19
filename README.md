@@ -6,17 +6,17 @@
 Ingeniería en Tecnologías de la Información e Innovación Digital
 Docente: M.T.I. Marco A. Ramírez Hernández
 
-## Prácticas y enunciados
+## Tabla de prácticas
 
 | Práctica | Enunciado | Evidencia en el proyecto |
 |---|---|---|
-| [02 · Conexiones remotas](Practica02/readme.md) | Configurar y comprobar usuarios, roles y privilegios en un servidor SQL. | Matriz de accesos, configuración y consultas de verificación. |
-| [03 · Manipulación de datos](Practica03/README.md) | Integrar relaciones, procedimientos, funciones y eventos en conexiones remotas. | 25 tablas, 72 triggers, 25 vistas y 7,500 cuentas vinculadas a sus perfiles. |
-| [04 · Procesos de simulación de compra](Practica04/README.md) | Simular compras y comprobar pagos, devoluciones, cancelaciones, envíos y trazabilidad. | Cinco casos ejecutados con sus pedidos y consultas de auditoría. |
+| [Práctica 02 · Conexiones remotas para bases de datos SQL](Practica02/readme.md) | Configurar y comprobar usuarios, roles y privilegios en un servidor SQL. | Matriz de accesos, configuración y consultas de verificación. |
+| [Práctica 03 · Manipulación de datos en conexiones remotas](Practica03/README.md) | Integrar relaciones, procedimientos, funciones y eventos en conexiones remotas. | 25 tablas, 72 triggers, 25 vistas y 7,500 cuentas vinculadas a sus perfiles. |
+| [Práctica 04 · Simulación de compras y transacciones](Practica04/README.md) | Simular compras y comprobar pagos, devoluciones, cancelaciones, envíos y trazabilidad. | Cinco casos ejecutados con sus pedidos y consultas de auditoría. |
 
 ## Explorar el modelo
 
-La [Práctica 03](Practica03/docs/) reúne el diccionario y seis mapas de Archify para identidad, catálogo, compra, pagos, entrega y posventa. El [índice HTML](Practica03/docs/index.html) es la entrada a los archivos estáticos. GitHub Pages sigue pendiente de activación.
+La [Práctica 03](Practica03/docs/) reúne el diccionario y seis mapas de Archify para identidad, catálogo, compra, pagos, entrega y posventa. El [índice HTML](Practica03/docs/index.html) es la entrada a los archivos estáticos. El [flujo de publicación](.github/workflows/pages.yml) despliega ese directorio desde `main` cuando GitHub Pages está habilitado con GitHub Actions. El plan actual del repositorio privado impide activar Pages.
 
 ## Reproducir el laboratorio
 
