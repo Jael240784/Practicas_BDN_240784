@@ -1,0 +1,5 @@
+SET ROLE buyer;
+START TRANSACTION;
+SELECT USER(),CURRENT_ROLE();
+CALL sp_practica04_case2('oficial-01');
+COMMIT;
