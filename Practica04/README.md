@@ -1,4 +1,4 @@
-# Práctica 04 · Procesos de simulación de compra
+# Práctica 04 · Simulación de compras y transacciones
 
 La práctica usa el esquema MySQL `db_test` del VPS. Los casos se ejecutan desde un cliente TCP con la cuenta `AppWeb` y los roles definidos en MySQL.
 
@@ -14,6 +14,8 @@ La práctica usa el esquema MySQL `db_test` del VPS. Los casos se ejecutan desde
 Aplica primero las migraciones de la Práctica 03. Instala los procedimientos del caso con una cuenta administradora. Los scripts `*_run_case*.sql` ejecutan el flujo como `AppWeb` en una transacción. Los folios oficiales corresponden a ejecuciones ya guardadas. Usa un folio nuevo para una nueva demostración.
 
 ## Resultados comprobados
+
+Ejecuta las [consultas de verificación](queries/verify_cases.sql) para revisar los pedidos y su trazabilidad.
 
 | Caso | Pedido | Resultado |
 |---|---:|---|
