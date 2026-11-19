@@ -20,7 +20,7 @@ Ingeniería en Tecnologías de la Información e Innovación Digital
 
 Consulta el [diccionario en Markdown](Practica03/docs/diccionario.md) desde GitHub. Para usar el visor interactivo, descarga el artefacto **diccionario-mysql** de la última ejecución exitosa de [GitHub Actions](../../actions/workflows/pages.yml), descomprímelo y abre `index.html`.
 
-El repositorio es privado y GitHub Pages requiere un plan compatible. El flujo de publicación está preparado para activarse desde Actions cuando Pages esté habilitado.
+Abre el [diccionario interactivo en GitHub Pages](https://jael240784.github.io/Practicas_BDN_240784/). El flujo de Actions publica únicamente los archivos del diccionario.
 
 ## Infraestructura
 
