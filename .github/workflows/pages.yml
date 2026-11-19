@@ -26,13 +26,17 @@ jobs:
           python - <<'PY'
           from html.parser import HTMLParser
           from pathlib import Path
+          from urllib.parse import urlsplit
 
           root = Path('Practica03/docs')
 
           class IndexLinks(HTMLParser):
               def handle_starttag(self, tag, attrs):
                   href = dict(attrs).get('href')
-                  if tag == 'a' and href and not (root / href).is_file():
+                  if tag != 'a' or not href:
+                      return
+                  target = urlsplit(href)
+                  if not target.scheme and not target.netloc and target.path not in ('', './') and not (root / target.path).is_file():
                       raise ValueError(f'Enlace roto: {href}')
 
           IndexLinks().feed((root / 'index.html').read_text(encoding='utf-8'))

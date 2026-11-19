@@ -34,3 +34,9 @@ Consulta el [Compose y las evidencias del VPS](../Unidad01/README.md) para ident
 2. Revisa el [script de usuarios y privilegios](scripts/remote_users_privileges_creation.sql) con una cuenta administradora.
 3. Abre una conexión remota con la cuenta asignada y ejecuta las [consultas de verificación](queries/consultas_verificacion.sql). Contrasta la cuenta, los roles y los permisos con la matriz anterior.
 4. Consulta los [respaldos](backups/) para revisar el esquema histórico y el [lote de productos](seeds/) para localizar el archivo de prueba.
+
+## Evidencia para la entrega
+
+Registra el motor y la cuenta de conexión, el rol efectivo y las consultas de verificación ejecutadas. Para reconstruir el entorno desde cero, consulta la [Unidad 1](../Unidad01/README.md). Para rastrear operaciones hechas como comprador, usa la [ruta de auditoría de compras](../Practica04/README.md#ruta-de-auditoría).
+
+[Regresar a la portada](../README.md)

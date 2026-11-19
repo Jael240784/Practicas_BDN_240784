@@ -18,9 +18,11 @@ Ingeniería en Tecnologías de la Información e Innovación Digital
 
 ## Diccionario y modelo relacional
 
-Consulta el [diccionario en Markdown](Practica03/docs/diccionario.md) desde GitHub. Para usar el visor interactivo, descarga el artefacto **diccionario-mysql** de la última ejecución exitosa de [GitHub Actions](../../actions/workflows/pages.yml), descomprímelo y abre `index.html`.
+> **Atlas de db_test**
 
-Abre el [diccionario interactivo en GitHub Pages](https://jael240784.github.io/Practicas_BDN_240784/). El flujo de Actions publica únicamente los archivos del diccionario.
+> Consulta tablas, columnas y claves, navega los modelos por dominio y revisa los resultados de los cinco casos de compra.
+
+[**Abrir el atlas**](https://jael240784.github.io/Practicas_BDN_240784/) · [Buscar tablas y columnas](https://jael240784.github.io/Practicas_BDN_240784/diccionario.html) · [Ver el modelo completo](https://jael240784.github.io/Practicas_BDN_240784/mere.html)
 
 ## Infraestructura
 

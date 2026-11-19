@@ -30,3 +30,13 @@ El procedimiento general de [generación de usuarios](scripts/05_generate_users.
 | Inventario y catálogo | [Evento de inventario](scripts/07_inventory_event.sql), [proveedores](scripts/08_link_product_providers.sql) y [cobertura](scripts/09_category_coverage.sql) | Auditoría de inventario y asociaciones del catálogo. |
 
 Ejecuta la [consulta de comprobación](queries/verify_user_batches.sql) después de la carga. Usa el [índice de diagramas](docs/index.html) para ubicar el dominio y el [diccionario](docs/diccionario.md) para consultar campos y restricciones.
+
+## Lectura del modelo
+
+- [Identidad y auditoría](https://jael240784.github.io/Practicas_BDN_240784/identidad.html) reúne cuentas, personas y registro de operaciones.
+- [Catálogo](https://jael240784.github.io/Practicas_BDN_240784/catalogo.html) muestra las asociaciones de productos, categorías y proveedores.
+- [Compra](https://jael240784.github.io/Practicas_BDN_240784/compra.html) sigue el carrito, los pedidos y sus líneas. [Pagos](https://jael240784.github.io/Practicas_BDN_240784/pagos.html) detalla sus métodos y transacciones.
+
+En el [diccionario interactivo](https://jael240784.github.io/Practicas_BDN_240784/diccionario.html), busca por tabla, columna o tipo. Revisa la nulabilidad y los valores predeterminados antes de consultar la referencia de una columna.
+
+[Regresar a la portada](../README.md) · [Continuar con la simulación de compras](../Practica04/README.md)

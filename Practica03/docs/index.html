@@ -1,25 +1,44 @@
 <!doctype html>
 <html lang="es">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Diccionario MySQL · Adrián González 240784</title>
-<style>
-body{max-width:54rem;margin:3rem auto;padding:0 1rem;font:1rem/1.5 system-ui;color:#183328;background:#f4f7f5}
-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.8rem}
-nav a{padding:1rem;border:1px solid #c8dad0;border-radius:.5rem;background:#fff;color:#124b35}
-</style>
-<main>
-<h1>Diccionario MySQL</h1>
-<p>Adrián González · 240784 · Práctica 03</p>
-<p>Esquema db_test con 25 tablas, 223 columnas y 39 claves foráneas.</p>
-<nav aria-label="Dominios del modelo">
-<a href="identidad.html">Identidad y auditoría</a>
-<a href="catalogo.html">Catálogo</a>
-<a href="compra.html">Compra</a>
-<a href="pagos.html">Pagos</a>
-<a href="entrega.html">Entrega</a>
-<a href="posventa.html">Posventa</a>
-</nav>
-<p><a href="diccionario.html">Diccionario detallado</a> · <a href="mere.html">Mapa completo (requiere zoom)</a></p>
+<title>Atlas MySQL · Adrián González</title>
+<link rel="stylesheet" href="atlas.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top"><div class="shell bar">
+<a class="brand" href="./">BDN <span>Atlas MySQL</span></a>
+<nav aria-label="Secciones"><a href="#modelos">Modelos</a><a href="diccionario.html">Diccionario</a><a href="#casos">Casos</a></nav>
+</div></header>
+<main class="shell" id="contenido">
+<section class="hero" aria-labelledby="titulo">
+<div><p class="eyebrow">BASES DE DATOS EN LA NUBE · 240784</p>
+<h1 id="titulo">Atlas de <code>db_test</code></h1>
+<p>Explora el esquema MySQL del laboratorio de Adrián González y sigue el recorrido de una compra, desde el carrito hasta la entrega o el reembolso.</p>
+<div class="actions"><a class="primary" href="diccionario.html">Explorar diccionario</a><a href="mere.html">Abrir modelo completo ↗</a></div></div>
+<dl class="stats"><div><dt>Tablas</dt><dd>25</dd></div><div><dt>Columnas</dt><dd>223</dd></div><div><dt>Claves foráneas</dt><dd>39</dd></div><div><dt>Casos de prueba</dt><dd>5</dd></div></dl>
+</section>
+<section id="modelos"><h2>Modelos por dominio</h2>
+<div class="cards">
+<a href="identidad.html"><strong>Identidad y auditoría</strong><span>Cuentas, perfiles y bitácora.</span></a>
+<a href="catalogo.html"><strong>Catálogo</strong><span>Productos, categorías y proveedores.</span></a>
+<a href="compra.html"><strong>Compra</strong><span>Carritos, pedidos y líneas de compra.</span></a>
+<a href="pagos.html"><strong>Pagos</strong><span>Métodos, cobros y transacciones.</span></a>
+<a href="entrega.html"><strong>Entrega</strong><span>Domicilios y seguimiento de envíos.</span></a>
+<a href="posventa.html"><strong>Posventa</strong><span>Cancelaciones, devoluciones y reembolsos.</span></a>
+</div></section>
+<section id="casos"><h2>Casos de prueba</h2>
+<div class="table-wrap"><table><thead><tr><th>Escenario</th><th>Pedido</th><th>Resultado registrado</th></tr></thead><tbody>
+<tr><td>Compra con débito</td><td>2</td><td>Cinco productos, autorización y entrega.</td></tr>
+<tr><td>Crédito en seis cuotas</td><td>3</td><td>Cinco autorizaciones, un rechazo y reenvío del producto.</td></tr>
+<tr><td>Cancelación parcial</td><td>5</td><td>Reembolso de $2,807.80 y entrega del resto.</td></tr>
+<tr><td>SPEI y recolección</td><td>6</td><td>Recolección después del intento de entrega fallido.</td></tr>
+<tr><td>Inventario insuficiente</td><td>7</td><td>Pedido cancelado, cupón reactivado y sin cobro.</td></tr>
+</tbody></table></div>
+<p><a href="https://github.com/Jael240784/Practicas_BDN_240784/blob/main/Practica04/README.md">Ver guía de ejecución y evidencia ↗</a></p>
+</section>
 </main>
-</html>
+<footer class="shell footer">Jael Adrián González Cruz · Grupo 7A · <a href="https://github.com/Jael240784/Practicas_BDN_240784">Repositorio del laboratorio</a></footer>
+</body></html>

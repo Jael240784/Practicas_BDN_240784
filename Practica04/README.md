@@ -38,3 +38,37 @@ Ejecuta las [consultas de verificación](queries/verify_cases.sql) para revisar 
 | Inventario insuficiente | [Procedimiento](scripts/10_case5.sql) | [Caso 5](scripts/11_run_case5.sql) |
 
 En la revisión de evidencias, usa el identificador de pedido para relacionar el resultado con su [consulta de validación](queries/verify_cases.sql). El [índice de evidencias](docs/README.md) distingue el pedido oficial del Caso 3 de su ejecución anterior.
+
+## Qué demuestra cada caso
+
+### 1. Débito y entrega · Pedido 2
+
+La prueba conecta el registro de cuenta y perfil con una compra de cinco productos. Comprueba la orden y sus líneas antes de cotejar el pago, la autorización y el estado de entrega.
+
+### 2. Crédito y reposición · Pedido 3
+
+La prueba registra seis intentos de pago. Comprueba cinco autorizaciones y un rechazo, y coteja los registros de devolución y envío para seguir la reposición.
+
+### 3. Cancelación parcial · Pedido 5
+
+La cancelación afecta una parte de la orden. Comprueba el importe del reembolso en `tb_refunds`, su vínculo con `tb_cancellations` y el estado del envío para los artículos restantes.
+
+### 4. SPEI y recolección · Pedido 6
+
+Comprueba el registro del pago y el seguimiento del envío. La resolución del caso documenta el paso de un intento de entrega fallido a la recolección.
+
+### 5. Inventario insuficiente · Pedido 7
+
+Comprueba el estado final de la orden y del método asociado al cupón. Contrasta ambos con la ausencia de un cobro para el pedido.
+
+## Ruta de auditoría
+
+| Evidencia | Tablas |
+|---|---|
+| Orden y productos | `tb_buyer_orders`, `tbd_order_items` |
+| Pago y eventos | `tb_payments`, `tb_payment_transactions` |
+| Entrega y devolución | `tb_shipments`, `tb_returns` |
+| Cancelación y reembolso | `tb_cancellations`, `tb_refunds` |
+| Actor de la operación | `tb_logs`, filtrada por la conexión `AppWeb` |
+
+[Explorar el atlas publicado](https://jael240784.github.io/Practicas_BDN_240784/) · [Regresar a la portada](../README.md)
