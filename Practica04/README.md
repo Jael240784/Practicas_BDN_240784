@@ -1,7 +1,5 @@
 # Práctica 04 · Procesos de simulación de compra
 
-Adrián González · 240784
-
 La práctica usa el esquema MySQL `db_test` del VPS. Los casos se ejecutan desde un cliente TCP con la cuenta `AppWeb` y los roles definidos en MySQL.
 
 | Carpeta | Contenido |
