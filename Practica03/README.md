@@ -19,3 +19,14 @@ El procedimiento general de [generación de usuarios](scripts/05_generate_users.
 ## Consultas y documentación
 
 [Verificar lotes](queries/verify_user_batches.sql) · [Diccionario](docs/diccionario.md) · [Diagramas](docs/index.html) · [Cuentas y roles](../Practica02/readme.md#usuarios-remotos-y-roles)
+
+## Orden de preparación
+
+| Etapa | Archivos | Qué revisar |
+|---|---|---|
+| Perfiles y comercio | [Perfiles](scripts/01_people.sql) y [esquema](scripts/02_commerce_schema.sql) | Tablas, relaciones y estructura base de pedidos y pagos. |
+| Organización de datos | [Categorías](scripts/03_trace_categories.sql), [archivo histórico](scripts/04_archive_legacy_users.sql) y [actividad](scripts/05_account_activity.sql) | Cobertura y trazabilidad de los datos existentes. |
+| Carga por lotes | [Generador](scripts/05_generate_users.sql) y [ejecución de lotes](scripts/06_run_user_batches.sql) | Cuentas creadas, perfiles asociados y actividad registrada. |
+| Inventario y catálogo | [Evento de inventario](scripts/07_inventory_event.sql), [proveedores](scripts/08_link_product_providers.sql) y [cobertura](scripts/09_category_coverage.sql) | Auditoría de inventario y asociaciones del catálogo. |
+
+Ejecuta la [consulta de comprobación](queries/verify_user_batches.sql) después de la carga. Usa el [índice de diagramas](docs/index.html) para ubicar el dominio y el [diccionario](docs/diccionario.md) para consultar campos y restricciones.

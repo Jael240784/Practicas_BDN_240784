@@ -26,3 +26,15 @@ Ejecuta las [consultas de verificación](queries/verify_cases.sql) para revisar 
 | 5. Inventario insuficiente | 7 | Pedido cancelado, cupón reactivado y sin cobro |
 
 [Consultas de comprobación](queries/verify_cases.sql) · [Diccionario MySQL](../Practica03/docs/diccionario.md)
+
+## Scripts por escenario
+
+| Caso | Instalación | Ejecución |
+|---|---|---|
+| Compra con débito | [Procedimiento](scripts/01_case1.sql) y [roles](scripts/02_case1_roles.sql) | [Caso 1](scripts/03_run_case1.sql) |
+| Compra a seis cuotas y reposición | [Procedimiento](scripts/04_case2.sql) | [Caso 2](scripts/05_run_case2.sql) |
+| Cancelación parcial | [Procedimiento](scripts/06_case3.sql) | [Caso 3](scripts/07_run_case3.sql) |
+| SPEI y recolección | [Procedimiento](scripts/08_case4.sql) | [Caso 4](scripts/09_run_case4.sql) |
+| Inventario insuficiente | [Procedimiento](scripts/10_case5.sql) | [Caso 5](scripts/11_run_case5.sql) |
+
+En la revisión de evidencias, usa el identificador de pedido para relacionar el resultado con su [consulta de validación](queries/verify_cases.sql). El [índice de evidencias](docs/README.md) distingue el pedido oficial del Caso 3 de su ejecución anterior.

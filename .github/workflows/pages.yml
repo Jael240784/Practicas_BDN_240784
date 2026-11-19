@@ -1,30 +1,64 @@
-name: Publicar diccionario MySQL
+name: Diccionario MySQL
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'Practica03/docs/**'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Publicar en GitHub Pages si Pages está habilitado
+        type: boolean
+        default: false
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: github-pages
-  cancel-in-progress: false
 
 jobs:
-  deploy:
-    if: github.ref == 'refs/heads/main'
+  package:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar enlaces del índice
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          root = Path('Practica03/docs')
+
+          class IndexLinks(HTMLParser):
+              def handle_starttag(self, tag, attrs):
+                  href = dict(attrs).get('href')
+                  if tag == 'a' and href and not (root / href).is_file():
+                      raise ValueError(f'Enlace roto: {href}')
+
+          IndexLinks().feed((root / 'index.html').read_text(encoding='utf-8'))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: diccionario-mysql
+          path: Practica03/docs/
+          if-no-files-found: error
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main' && inputs.publish
+        with:
+          path: Practica03/docs/
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && inputs.publish
+    needs: package
+    runs-on: ubuntu-latest
+    concurrency: github-pages
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: Practica03/docs
       - name: Publicar en GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
