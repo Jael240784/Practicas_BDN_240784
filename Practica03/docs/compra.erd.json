@@ -211,7 +211,27 @@
       "url": "https://github.com/Jael240784/Practicas_BDN_240784.git",
       "revision": "ca8ebcf6591b555657368446ea8c1a34d00db0ba",
       "provider": "github"
-    }
+    },
+    "views": [
+      {
+        "label": "Carrito",
+        "focus": [
+          "tb_carts",
+          "tbd_carts_items"
+        ],
+        "note": "Relación entre el carrito y sus artículos.",
+        "id": "carrito"
+      },
+      {
+        "label": "Pedido",
+        "focus": [
+          "tb_buyer_orders",
+          "tbd_order_items"
+        ],
+        "note": "Relación entre el pedido y sus artículos.",
+        "id": "pedido"
+      }
+    ]
   },
   "schema_version": 1,
   "diagram_type": "erd",
