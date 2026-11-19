@@ -1,0 +1,200 @@
+{
+  "relationships": [
+    {
+      "id": "rel_26",
+      "from": "tbd_carts_items",
+      "to": "tb_carts",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    },
+    {
+      "id": "rel_29",
+      "from": "tbd_order_items",
+      "to": "tb_buyer_orders",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    }
+  ],
+  "entities": [
+    {
+      "id": "tb_carts",
+      "label": "tb_carts",
+      "row": 0.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "user_ID",
+          "type": "bigint unsigned",
+          "key": "uk"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tbd_carts_items",
+      "label": "tbd_carts_items",
+      "row": 0.0,
+      "col": 1,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "cart_ID",
+          "type": "int unsigned",
+          "references": "tb_carts.ID",
+          "key": [
+            "pk",
+            "fk"
+          ]
+        },
+        {
+          "name": "provider_ID",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "product_ID",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "quantity",
+          "type": "int"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tb_buyer_orders",
+      "label": "tb_buyer_orders",
+      "row": 1.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "buyer_ID",
+          "type": "bigint unsigned"
+        },
+        {
+          "name": "seller_ID",
+          "type": "bigint unsigned"
+        },
+        {
+          "name": "subtotal",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "shipping_cost",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "fulfillment_status",
+          "type": "enum('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned')"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tbd_order_items",
+      "label": "tbd_order_items",
+      "row": 1.0,
+      "col": 1,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "seller_order_ID",
+          "type": "int unsigned",
+          "references": "tb_buyer_orders.ID",
+          "key": "fk"
+        },
+        {
+          "name": "product_ID",
+          "type": "bigint unsigned"
+        },
+        {
+          "name": "product_name",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "quantity",
+          "type": "int unsigned"
+        },
+        {
+          "name": "unit_price",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "subtotal",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "title": "MERE 240784 · Compra",
+    "output": "Practica03/docs/compra.html",
+    "locale": "es",
+    "quality_profile": "standard"
+  },
+  "schema_version": 1,
+  "diagram_type": "erd",
+  "cards": [
+    {
+      "items": [
+        "tb_carts.user_ID → tb_users.id",
+        "tbd_carts_items.provider_ID → tbd_products_users_providers.user_ID",
+        "tbd_carts_items.product_ID → tbd_products_users_providers.product_ID",
+        "tb_buyer_orders.buyer_ID → tb_users.id",
+        "tb_buyer_orders.seller_ID → tb_users.id",
+        "tbd_order_items.product_ID → tb_products.id"
+      ],
+      "title": "Claves foráneas hacia otros dominios",
+      "dot": "cyan"
+    }
+  ],
+  "layout": {
+    "gapX": 95,
+    "mode": "grid",
+    "gapY": 60
+  }
+}

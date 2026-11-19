@@ -1,0 +1,357 @@
+{
+  "relationships": [
+    {
+      "id": "rel_12",
+      "from": "tb_refunds",
+      "to": "tb_cancellations",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    },
+    {
+      "id": "rel_14",
+      "from": "tb_refunds",
+      "to": "tb_returns",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    },
+    {
+      "id": "rel_24",
+      "from": "tbd_cancellation_items",
+      "to": "tb_cancellations",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    },
+    {
+      "id": "rel_35",
+      "from": "tbd_return_items",
+      "to": "tb_returns",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    }
+  ],
+  "entities": [
+    {
+      "id": "tb_cancellations",
+      "label": "tb_cancellations",
+      "row": 0.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "buyer_order_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "user_ID",
+          "type": "bigint unsigned"
+        },
+        {
+          "name": "cancellation_reason",
+          "type": "varchar(500)"
+        },
+        {
+          "name": "cancellation_status",
+          "type": "enum('Requested','Approved','Rejected','Completed')"
+        },
+        {
+          "name": "requested_date",
+          "type": "datetime"
+        },
+        {
+          "name": "resolved_date",
+          "type": "datetime"
+        },
+        {
+          "name": "resolution_notes",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tbd_cancellation_items",
+      "label": "tbd_cancellation_items",
+      "row": 0.0,
+      "col": 1,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "cancellation_ID",
+          "type": "int unsigned",
+          "references": "tb_cancellations.ID",
+          "key": "fk"
+        },
+        {
+          "name": "order_item_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "quantity",
+          "type": "int unsigned"
+        },
+        {
+          "name": "unit_amount",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "item_reason",
+          "type": "varchar(500)"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tb_returns",
+      "label": "tb_returns",
+      "row": 1.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "buyer_order_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "order_item_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "user_ID",
+          "type": "bigint unsigned"
+        },
+        {
+          "name": "quantity",
+          "type": "int unsigned"
+        },
+        {
+          "name": "return_reason",
+          "type": "varchar(500)"
+        },
+        {
+          "name": "return_status",
+          "type": "enum('Requested','Authorized','Rejected','InTransit','Received','Inspected','Completed')"
+        },
+        {
+          "name": "requested_date",
+          "type": "datetime"
+        },
+        {
+          "name": "received_date",
+          "type": "datetime"
+        },
+        {
+          "name": "resolved_date",
+          "type": "datetime"
+        },
+        {
+          "name": "resolution_notes",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tbd_return_items",
+      "label": "tbd_return_items",
+      "row": 1.0,
+      "col": 1,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "return_ID",
+          "type": "int unsigned",
+          "references": "tb_returns.ID",
+          "key": "fk"
+        },
+        {
+          "name": "order_item_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "quantity",
+          "type": "int unsigned"
+        },
+        {
+          "name": "unit_amount",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "item_reason",
+          "type": "varchar(500)"
+        },
+        {
+          "name": "item_condition",
+          "type": "enum('Unknown','New','Opened','Damaged')"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tb_refunds",
+      "label": "tb_refunds",
+      "row": 2.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "payment_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "cancellation_ID",
+          "type": "int unsigned",
+          "references": "tb_cancellations.ID",
+          "key": "fk"
+        },
+        {
+          "name": "return_ID",
+          "type": "int unsigned",
+          "references": "tb_returns.ID",
+          "key": "fk"
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "currency",
+          "type": "char(3)"
+        },
+        {
+          "name": "refund_reason",
+          "type": "varchar(500)"
+        },
+        {
+          "name": "refund_status",
+          "type": "enum('Requested','Approved','Processing','Completed','Rejected','Failed')"
+        },
+        {
+          "name": "provider_reference",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "requested_date",
+          "type": "datetime"
+        },
+        {
+          "name": "processed_date",
+          "type": "datetime"
+        },
+        {
+          "name": "resolution_notes",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "title": "MERE 240784 · Posventa",
+    "output": "Practica03/docs/posventa.html",
+    "locale": "es",
+    "quality_profile": "standard"
+  },
+  "schema_version": 1,
+  "diagram_type": "erd",
+  "cards": [
+    {
+      "items": [
+        "tb_cancellations.buyer_order_ID → tb_buyer_orders.ID",
+        "tb_cancellations.user_ID → tb_users.id",
+        "tbd_cancellation_items.order_item_ID → tbd_order_items.ID",
+        "tb_returns.buyer_order_ID → tb_buyer_orders.ID",
+        "tb_returns.order_item_ID → tbd_order_items.ID",
+        "tb_returns.user_ID → tb_users.id",
+        "tbd_return_items.order_item_ID → tbd_order_items.ID",
+        "tb_refunds.payment_ID → tb_payments.ID"
+      ],
+      "title": "Claves foráneas hacia otros dominios",
+      "dot": "cyan"
+    }
+  ],
+  "layout": {
+    "gapX": 95,
+    "mode": "grid",
+    "gapY": 60
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "relationships": [
+    {
+      "id": "rel_6",
+      "from": "tb_payment_methods",
+      "to": "tbc_payment_methods_types",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    },
+    {
+      "id": "rel_9",
+      "from": "tb_payment_transactions",
+      "to": "tb_payments",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    },
+    {
+      "id": "rel_37",
+      "from": "tbd_user_payment_methods",
+      "to": "tbc_payment_methods_types",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    }
+  ],
+  "entities": [
+    {
+      "id": "tbc_payment_methods_types",
+      "label": "tbc_payment_methods_types",
+      "row": 0.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "code",
+          "type": "varchar(30)",
+          "key": "uk"
+        },
+        {
+          "name": "description",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tbd_user_payment_methods",
+      "label": "tbd_user_payment_methods",
+      "row": 0.0,
+      "col": 1,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "user_ID",
+          "type": "bigint unsigned"
+        },
+        {
+          "name": "payment_method_type_ID",
+          "type": "int unsigned",
+          "references": "tbc_payment_methods_types.ID",
+          "key": "fk"
+        },
+        {
+          "name": "provider",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "provider_method_ref",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "label",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "last_four",
+          "type": "char(4)"
+        },
+        {
+          "name": "is_default",
+          "type": "tinyint"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tb_payment_methods",
+      "label": "tb_payment_methods",
+      "row": 1.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "order_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "user_ID",
+          "type": "bigint unsigned"
+        },
+        {
+          "name": "payment_method_type_ID",
+          "type": "int unsigned",
+          "references": "tbc_payment_methods_types.ID",
+          "key": "fk"
+        },
+        {
+          "name": "payment_reference",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "currency",
+          "type": "char(3)"
+        },
+        {
+          "name": "payment_status",
+          "type": "enum('Pending','Authorized','Paid','Failed','Cancelled','Refunded')"
+        },
+        {
+          "name": "payment_date",
+          "type": "datetime"
+        },
+        {
+          "name": "notes",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tb_payments",
+      "label": "tb_payments",
+      "row": 1.0,
+      "col": 1,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "order_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "currency",
+          "type": "char(3)"
+        },
+        {
+          "name": "payment_method",
+          "type": "enum('Card','SPEI','Transfer','Cash')"
+        },
+        {
+          "name": "provider",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "provider_reference",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "payment_status",
+          "type": "enum('Pending','Authorized','Paid','Failed','Refunded','PartiallyRefunded')"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "paid_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tb_payment_transactions",
+      "label": "tb_payment_transactions",
+      "row": 2.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "payment_ID",
+          "type": "int unsigned",
+          "references": "tb_payments.ID",
+          "key": "fk"
+        },
+        {
+          "name": "event_type",
+          "type": "enum('Created','Authorized','Captured','Failed','Refunded','PartiallyRefunded')"
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "event_reference",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "remarks",
+          "type": "text"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "title": "MERE 240784 · Pagos",
+    "output": "Practica03/docs/pagos.html",
+    "locale": "es",
+    "quality_profile": "standard"
+  },
+  "schema_version": 1,
+  "diagram_type": "erd",
+  "cards": [
+    {
+      "items": [
+        "tbd_user_payment_methods.user_ID → tb_users.id",
+        "tb_payment_methods.order_ID → tb_buyer_orders.ID",
+        "tb_payment_methods.user_ID → tb_users.id",
+        "tb_payments.order_ID → tb_buyer_orders.ID"
+      ],
+      "title": "Claves foráneas hacia otros dominios",
+      "dot": "cyan"
+    }
+  ],
+  "layout": {
+    "gapX": 95,
+    "mode": "grid",
+    "gapY": 60
+  }
+}

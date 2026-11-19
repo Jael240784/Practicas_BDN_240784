@@ -1,0 +1,164 @@
+{
+  "relationships": [
+    {
+      "id": "rel_11",
+      "from": "tb_people",
+      "to": "tb_users",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    }
+  ],
+  "entities": [
+    {
+      "id": "tb_users",
+      "label": "tb_users",
+      "row": 0.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "id",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "email",
+          "type": "varchar(160)",
+          "key": "uk"
+        },
+        {
+          "name": "nickname",
+          "type": "varchar(100)",
+          "key": "uk"
+        },
+        {
+          "name": "password_hash",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "rol",
+          "type": "varchar(32)"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        }
+      ]
+    },
+    {
+      "id": "tb_people",
+      "label": "tb_people",
+      "row": 0.0,
+      "col": 1,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "id",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "user_id",
+          "type": "bigint unsigned",
+          "references": "tb_users.id",
+          "key": [
+            "uk",
+            "fk"
+          ]
+        },
+        {
+          "name": "given_names",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "paternal_surname",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "maternal_surname",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "birth_date",
+          "type": "date"
+        },
+        {
+          "name": "gender_code",
+          "type": "varchar(16)"
+        },
+        {
+          "name": "country_code",
+          "type": "char(2)"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        }
+      ]
+    },
+    {
+      "id": "tb_logs",
+      "label": "tb_logs",
+      "row": 1.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "id",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "table_name",
+          "type": "varchar(64)"
+        },
+        {
+          "name": "operation",
+          "type": "enum('Create','Read','Update','Delete')"
+        },
+        {
+          "name": "db_user",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "description",
+          "type": "text"
+        },
+        {
+          "name": "operation_date",
+          "type": "timestamp"
+        },
+        {
+          "name": "operation_status",
+          "type": "tinyint(1)"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "title": "MERE 240784 · Identidad",
+    "output": "Practica03/docs/identidad.html",
+    "locale": "es",
+    "quality_profile": "standard"
+  },
+  "schema_version": 1,
+  "diagram_type": "erd",
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Referencias entre dominios",
+      "items": [
+        "Las columnas FK conservan el destino. Consulta el diccionario para ver el catálogo completo."
+      ]
+    }
+  ],
+  "layout": {
+    "gapX": 95,
+    "mode": "grid",
+    "gapY": 60
+  }
+}

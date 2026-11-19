@@ -1,0 +1,266 @@
+{
+  "relationships": [
+    {
+      "id": "rel_30",
+      "from": "tbd_products_categories",
+      "to": "tbc_categories",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    },
+    {
+      "id": "rel_31",
+      "from": "tbd_products_categories",
+      "to": "tb_products",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    },
+    {
+      "id": "rel_32",
+      "from": "tbd_products_users_providers",
+      "to": "tb_products",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    },
+    {
+      "id": "rel_39",
+      "from": "tbd_users_wishlist_products",
+      "to": "tb_products",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    }
+  ],
+  "entities": [
+    {
+      "id": "tb_products",
+      "label": "tb_products",
+      "row": 0.0,
+      "col": 1,
+      "width": 430,
+      "attributes": [
+        {
+          "name": "id",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "name",
+          "type": "varchar(140)"
+        },
+        {
+          "name": "description",
+          "type": "text"
+        },
+        {
+          "name": "price",
+          "type": "decimal(10,2)"
+        },
+        {
+          "name": "stock",
+          "type": "int"
+        },
+        {
+          "name": "seller_nickname",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp"
+        },
+        {
+          "name": "sku",
+          "type": "varchar(80)",
+          "key": "uk"
+        },
+        {
+          "name": "status",
+          "type": "tinyint(1)"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tbc_categories",
+      "label": "tbc_categories",
+      "row": 2.0,
+      "col": 0,
+      "width": 430,
+      "attributes": [
+        {
+          "name": "id",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "name",
+          "type": "varchar(100)",
+          "key": "uk"
+        },
+        {
+          "name": "description",
+          "type": "text"
+        },
+        {
+          "name": "parent_category_id",
+          "type": "bigint unsigned",
+          "references": "tbc_categories.id",
+          "key": "fk"
+        },
+        {
+          "name": "status",
+          "type": "tinyint(1)"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tbd_products_categories",
+      "label": "tbd_products_categories",
+      "row": 1.0,
+      "col": 1,
+      "width": 430,
+      "attributes": [
+        {
+          "name": "product_id",
+          "type": "bigint unsigned",
+          "references": "tb_products.id",
+          "key": [
+            "pk",
+            "fk"
+          ]
+        },
+        {
+          "name": "category_id",
+          "type": "bigint unsigned",
+          "references": "tbc_categories.id",
+          "key": [
+            "pk",
+            "fk"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "tinyint(1)"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tbd_products_users_providers",
+      "label": "tbd_products_users_providers",
+      "row": 0.0,
+      "col": 0,
+      "width": 430,
+      "attributes": [
+        {
+          "name": "user_ID",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "product_ID",
+          "type": "bigint unsigned",
+          "references": "tb_products.id",
+          "key": [
+            "pk",
+            "fk"
+          ]
+        },
+        {
+          "name": "type_ownership",
+          "type": "enum('Owner','Reseller','Distributor')"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "avalaible_date",
+          "type": "datetime"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tbd_users_wishlist_products",
+      "label": "tbd_users_wishlist_products",
+      "row": 1.0,
+      "col": 0,
+      "width": 430,
+      "attributes": [
+        {
+          "name": "user_ID",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "product_ID",
+          "type": "bigint unsigned",
+          "references": "tb_products.id",
+          "key": [
+            "pk",
+            "fk"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "title": "MERE 240784 · Catálogo",
+    "output": "Practica03/docs/catalogo.html",
+    "locale": "es",
+    "quality_profile": "standard"
+  },
+  "schema_version": 1,
+  "diagram_type": "erd",
+  "cards": [
+    {
+      "items": [
+        "tbd_products_users_providers.user_ID → tb_users.id",
+        "tbd_users_wishlist_products.user_ID → tb_users.id"
+      ],
+      "title": "Claves foráneas hacia otros dominios",
+      "dot": "cyan"
+    }
+  ],
+  "layout": {
+    "gapX": 95,
+    "mode": "grid",
+    "gapY": 60
+  }
+}

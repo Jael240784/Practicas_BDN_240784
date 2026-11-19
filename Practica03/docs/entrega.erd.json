@@ -1,0 +1,211 @@
+{
+  "relationships": [
+    {
+      "id": "rel_18",
+      "from": "tb_shipments",
+      "to": "tb_user_addresses",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    },
+    {
+      "id": "rel_22",
+      "from": "tbd_address_components",
+      "to": "tb_user_addresses",
+      "fromCardinality": "many",
+      "toCardinality": "one"
+    }
+  ],
+  "entities": [
+    {
+      "id": "tb_user_addresses",
+      "label": "tb_user_addresses",
+      "row": 0.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "user_ID",
+          "type": "bigint unsigned"
+        },
+        {
+          "name": "address_label",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "recipient_name",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "recipient_phone",
+          "type": "varchar(25)"
+        },
+        {
+          "name": "delivery_instructions",
+          "type": "varchar(500)"
+        },
+        {
+          "name": "latitude",
+          "type": "decimal(10,7)"
+        },
+        {
+          "name": "longitude",
+          "type": "decimal(10,7)"
+        },
+        {
+          "name": "is_default",
+          "type": "tinyint(1)"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tbd_address_components",
+      "label": "tbd_address_components",
+      "row": 0.0,
+      "col": 1,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "bigint unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "address_ID",
+          "type": "bigint unsigned",
+          "references": "tb_user_addresses.ID",
+          "key": "fk"
+        },
+        {
+          "name": "value",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "component_type",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "address_sup_ID",
+          "type": "bigint unsigned",
+          "references": "tbd_address_components.ID",
+          "key": "fk"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "id": "tb_shipments",
+      "label": "tb_shipments",
+      "row": 1.0,
+      "col": 0,
+      "width": 850,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": "pk"
+        },
+        {
+          "name": "buyer_order_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "address_ID",
+          "type": "bigint unsigned",
+          "references": "tb_user_addresses.ID",
+          "key": "fk"
+        },
+        {
+          "name": "carrier",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "tracking_number",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "shipping_cost",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "shipment_status",
+          "type": "enum('Pending','Preparing','Shipped','InTransit','Delivered','Failed','Returned')"
+        },
+        {
+          "name": "shipped_date",
+          "type": "datetime"
+        },
+        {
+          "name": "estimated_delivery_date",
+          "type": "datetime"
+        },
+        {
+          "name": "delivered_date",
+          "type": "datetime"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "title": "MERE 240784 · Entrega",
+    "output": "Practica03/docs/entrega.html",
+    "locale": "es",
+    "quality_profile": "standard"
+  },
+  "schema_version": 1,
+  "diagram_type": "erd",
+  "cards": [
+    {
+      "items": [
+        "tb_user_addresses.user_ID → tb_users.id",
+        "tb_shipments.buyer_order_ID → tb_buyer_orders.ID"
+      ],
+      "title": "Claves foráneas hacia otros dominios",
+      "dot": "cyan"
+    }
+  ],
+  "layout": {
+    "gapX": 95,
+    "mode": "grid",
+    "gapY": 60
+  }
+}
