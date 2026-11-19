@@ -55,3 +55,15 @@ th{color:var(--accent)}
 .catalog-main .entity h2,.catalog-main #triggers h2{margin:0}
 .catalog-main caption{text-align:left;padding:.5rem}
 @media(max-width:48rem){.catalog-layout{display:block}.catalog-side{position:static;max-height:13rem}.catalog-side nav:first-child{display:flex;flex-wrap:wrap}.catalog-main .lookup{position:static}.catalog-main .entity{scroll-margin-top:1rem}}
+
+.catalog-group summary,.inventory-group summary{cursor:pointer;font-weight:650;padding:.55rem .7rem}
+.catalog-group summary span,.inventory-group summary span{float:right;font-weight:400}
+.catalog-group summary span{color:#f5cb92}
+.catalog-group+.catalog-group{border-top:1px solid #514265}
+.catalog-group .domain-link{color:#f5cb92;font-size:.85rem}
+.inventory{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:.75rem;align-items:start}
+.inventory-group{background:var(--surface);border:1px solid var(--line);border-radius:.65rem}
+.inventory-group summary span,.inventory-group li span{color:var(--muted)}
+.inventory-group ul{margin:0;padding:.4rem .7rem .65rem;list-style:none}
+.inventory-group li{display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;padding:.35rem 0;border-top:1px solid var(--line)}
+.inventory-group code{overflow-wrap:anywhere}
