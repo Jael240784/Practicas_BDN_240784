@@ -1,0 +1,325 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Diccionario MySQL · 240784</title><style>body{max-width:72rem;margin:2rem auto;padding:0 1rem;font:16px system-ui;color:#17372b;background:#f5f8f6}table{border-collapse:collapse;background:white;width:100%}td,th{border:1px solid #cddbd3;padding:.45rem;text-align:left}section{overflow:auto}</style><a href="index.html">Volver al índice</a><h1>Diccionario MySQL</h1>
+<h2>tb_buyer_orders</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>buyer_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>seller_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>subtotal</td><td>decimal(12,2)</td><td>NO</td><td>0.00</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>shipping_cost</td><td>decimal(12,2)</td><td>NO</td><td>0.00</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>fulfillment_status</td><td>enum(&#x27;Pending&#x27;,&#x27;Accepted&#x27;,&#x27;Preparing&#x27;,&#x27;Sent&#x27;,&#x27;Delivered&#x27;,&#x27;Canceled&#x27;,&#x27;Returned&#x27;)</td><td>NO</td><td>Pending</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tb_cancellations</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>buyer_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>cancellation_reason</td><td>varchar(500)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>cancellation_status</td><td>enum(&#x27;Requested&#x27;,&#x27;Approved&#x27;,&#x27;Rejected&#x27;,&#x27;Completed&#x27;)</td><td>NO</td><td>Requested</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>requested_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>resolved_date</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>resolution_notes</td><td>text</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tb_carts</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>YES</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tb_logs</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>table_name</td><td>varchar(64)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>operation</td><td>enum(&#x27;Create&#x27;,&#x27;Read&#x27;,&#x27;Update&#x27;,&#x27;Delete&#x27;)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>db_user</td><td>varchar(100)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>description</td><td>text</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>operation_date</td><td>timestamp</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>MUL</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>operation_status</td><td>tinyint(1)</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
+</table></section>
+<h2>tb_payment_methods</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>payment_method_type_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tbc_payment_methods_types.ID</td></tr>
+<tr><td>payment_reference</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>amount</td><td>decimal(12,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>currency</td><td>char(3)</td><td>NO</td><td>MXN</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>payment_status</td><td>enum(&#x27;Pending&#x27;,&#x27;Authorized&#x27;,&#x27;Paid&#x27;,&#x27;Failed&#x27;,&#x27;Cancelled&#x27;,&#x27;Refunded&#x27;)</td><td>NO</td><td>Pending</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>payment_date</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>notes</td><td>text</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tb_payment_transactions</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>payment_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_payments.ID</td></tr>
+<tr><td>event_type</td><td>enum(&#x27;Created&#x27;,&#x27;Authorized&#x27;,&#x27;Captured&#x27;,&#x27;Failed&#x27;,&#x27;Refunded&#x27;,&#x27;PartiallyRefunded&#x27;)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>amount</td><td>decimal(12,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>event_reference</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>remarks</td><td>text</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+</table></section>
+<h2>tb_payments</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
+<tr><td>amount</td><td>decimal(12,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>currency</td><td>char(3)</td><td>NO</td><td>MXN</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>payment_method</td><td>enum(&#x27;Card&#x27;,&#x27;SPEI&#x27;,&#x27;Transfer&#x27;,&#x27;Cash&#x27;)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>provider</td><td>varchar(50)</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td>—</td></tr>
+<tr><td>provider_reference</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>payment_status</td><td>enum(&#x27;Pending&#x27;,&#x27;Authorized&#x27;,&#x27;Paid&#x27;,&#x27;Failed&#x27;,&#x27;Refunded&#x27;,&#x27;PartiallyRefunded&#x27;)</td><td>NO</td><td>Pending</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>paid_date</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tb_people</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>user_id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>given_names</td><td>varchar(150)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>paternal_surname</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>maternal_surname</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>birth_date</td><td>date</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>gender_code</td><td>varchar(16)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>country_code</td><td>char(2)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+</table></section>
+<h2>tb_products</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>name</td><td>varchar(140)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>description</td><td>text</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>price</td><td>decimal(10,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>stock</td><td>int</td><td>NO</td><td>0</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>seller_nickname</td><td>varchar(100)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>created_at</td><td>timestamp</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>sku</td><td>varchar(80)</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>tinyint(1)</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</table></section>
+<h2>tb_refunds</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>payment_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_payments.ID</td></tr>
+<tr><td>cancellation_ID</td><td>int unsigned</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td>tb_cancellations.ID</td></tr>
+<tr><td>return_ID</td><td>int unsigned</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td>tb_returns.ID</td></tr>
+<tr><td>amount</td><td>decimal(12,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>currency</td><td>char(3)</td><td>NO</td><td>MXN</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>refund_reason</td><td>varchar(500)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>refund_status</td><td>enum(&#x27;Requested&#x27;,&#x27;Approved&#x27;,&#x27;Processing&#x27;,&#x27;Completed&#x27;,&#x27;Rejected&#x27;,&#x27;Failed&#x27;)</td><td>NO</td><td>Requested</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>provider_reference</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>requested_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>processed_date</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>resolution_notes</td><td>text</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tb_returns</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>buyer_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
+<tr><td>order_item_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tbd_order_items.ID</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>quantity</td><td>int unsigned</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>return_reason</td><td>varchar(500)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>return_status</td><td>enum(&#x27;Requested&#x27;,&#x27;Authorized&#x27;,&#x27;Rejected&#x27;,&#x27;InTransit&#x27;,&#x27;Received&#x27;,&#x27;Inspected&#x27;,&#x27;Completed&#x27;)</td><td>NO</td><td>Requested</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>requested_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>received_date</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>resolved_date</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>resolution_notes</td><td>text</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tb_shipments</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>buyer_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
+<tr><td>address_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_user_addresses.ID</td></tr>
+<tr><td>carrier</td><td>varchar(100)</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td>—</td></tr>
+<tr><td>tracking_number</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>shipping_cost</td><td>decimal(12,2)</td><td>NO</td><td>0.00</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>shipment_status</td><td>enum(&#x27;Pending&#x27;,&#x27;Preparing&#x27;,&#x27;Shipped&#x27;,&#x27;InTransit&#x27;,&#x27;Delivered&#x27;,&#x27;Failed&#x27;,&#x27;Returned&#x27;)</td><td>NO</td><td>Pending</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>shipped_date</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>estimated_delivery_date</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>delivered_date</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tb_user_addresses</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>address_label</td><td>varchar(100)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>recipient_name</td><td>varchar(150)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>recipient_phone</td><td>varchar(25)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>delivery_instructions</td><td>varchar(500)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>latitude</td><td>decimal(10,7)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>longitude</td><td>decimal(10,7)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>is_default</td><td>tinyint(1)</td><td>NO</td><td>0</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tb_users</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>email</td><td>varchar(160)</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td>—</td></tr>
+<tr><td>nickname</td><td>varchar(100)</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td>—</td></tr>
+<tr><td>password_hash</td><td>varchar(255)</td><td>NO</td><td>demo-hash-not-for-login</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>rol</td><td>varchar(32)</td><td>NO</td><td>unregistered</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>created_at</td><td>timestamp</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+</table></section>
+<h2>tbc_categories</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>name</td><td>varchar(100)</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td>—</td></tr>
+<tr><td>description</td><td>text</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>parent_category_id</td><td>bigint unsigned</td><td>YES</td><td>—</td><td>MUL</td><td>—</td><td>tbc_categories.id</td></tr>
+<tr><td>status</td><td>tinyint(1)</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>created_at</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</table></section>
+<h2>tbc_payment_methods_types</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>code</td><td>varchar(30)</td><td>NO</td><td>—</td><td>UNI</td><td>—</td><td>—</td></tr>
+<tr><td>description</td><td>text</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tbd_address_components</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>address_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_user_addresses.ID, tbd_address_components.address_ID</td></tr>
+<tr><td>value</td><td>varchar(255)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>component_type</td><td>varchar(50)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>address_sup_ID</td><td>bigint unsigned</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>tbd_address_components.ID</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tbd_cancellation_items</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>cancellation_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_cancellations.ID</td></tr>
+<tr><td>order_item_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tbd_order_items.ID</td></tr>
+<tr><td>quantity</td><td>int unsigned</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>unit_amount</td><td>decimal(12,2)</td><td>NO</td><td>0.00</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>item_reason</td><td>varchar(500)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tbd_carts_items</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>cart_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_carts.ID</td></tr>
+<tr><td>provider_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tbd_products_users_providers.user_ID</td></tr>
+<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tbd_products_users_providers.product_ID</td></tr>
+<tr><td>quantity</td><td>int</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+</table></section>
+<h2>tbd_order_items</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>seller_order_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_buyer_orders.ID</td></tr>
+<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_products.id</td></tr>
+<tr><td>product_name</td><td>varchar(255)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>quantity</td><td>int unsigned</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>unit_price</td><td>decimal(12,2)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>subtotal</td><td>decimal(12,2)</td><td>YES</td><td>—</td><td>—</td><td>STORED GENERATED</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+</table></section>
+<h2>tbd_products_categories</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>product_id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_products.id</td></tr>
+<tr><td>category_id</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tbc_categories.id</td></tr>
+<tr><td>status</td><td>tinyint(1)</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>created_at</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</table></section>
+<h2>tbd_products_users_providers</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_products.id</td></tr>
+<tr><td>type_ownership</td><td>enum(&#x27;Owner&#x27;,&#x27;Reseller&#x27;,&#x27;Distributor&#x27;)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>avalaible_date</td><td>datetime</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tbd_return_items</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>return_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_returns.ID</td></tr>
+<tr><td>order_item_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tbd_order_items.ID</td></tr>
+<tr><td>quantity</td><td>int unsigned</td><td>NO</td><td>1</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>unit_amount</td><td>decimal(12,2)</td><td>NO</td><td>0.00</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>item_reason</td><td>varchar(500)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>item_condition</td><td>enum(&#x27;Unknown&#x27;,&#x27;New&#x27;,&#x27;Opened&#x27;,&#x27;Damaged&#x27;)</td><td>NO</td><td>Unknown</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tbd_user_payment_methods</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>auto_increment</td><td>—</td></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>payment_method_type_ID</td><td>int unsigned</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>tbc_payment_methods_types.ID</td></tr>
+<tr><td>provider</td><td>varchar(60)</td><td>NO</td><td>—</td><td>MUL</td><td>—</td><td>—</td></tr>
+<tr><td>provider_method_ref</td><td>varchar(255)</td><td>NO</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>label</td><td>varchar(100)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>last_four</td><td>char(4)</td><td>YES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>is_default</td><td>tinyint</td><td>NO</td><td>0</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>YES</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+<h2>tbd_users_wishlist_products</h2>
+<section><table>
+<tr><th>Columna</th><th>Tipo</th><th>Admite NULL</th><th>Valor predeterminado</th><th>Clave</th><th>Detalle</th><th>Referencias</th></tr>
+<tr><td>user_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_users.id</td></tr>
+<tr><td>product_ID</td><td>bigint unsigned</td><td>NO</td><td>—</td><td>PRI</td><td>—</td><td>tb_products.id</td></tr>
+<tr><td>status</td><td>bit(1)</td><td>NO</td><td>b&#x27;1&#x27;</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>creation_date</td><td>datetime</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>DEFAULT_GENERATED</td><td>—</td></tr>
+<tr><td>last_update</td><td>datetime</td><td>NO</td><td>—</td><td>—</td><td>on update CURRENT_TIMESTAMP</td><td>—</td></tr>
+</table></section>
+</html>
